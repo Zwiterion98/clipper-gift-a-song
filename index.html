@@ -6,20 +6,16 @@
   <title>Te presto un tema</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       background:
-        linear-gradient(rgba(10,10,10,.65), rgba(10,10,10,.92)),
-        url("https://clipper.com.uy/");
-      background-size: cover;
-      background-position: center;
-      color: white;
-      font-family: Arial, sans-serif;
+        radial-gradient(circle at top, rgba(29,185,84,.22), transparent 34%),
+        linear-gradient(180deg, #121212 0%, #000 100%);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
       display: grid;
       place-items: center;
       overflow: hidden;
@@ -27,34 +23,34 @@
 
     .container {
       width: min(440px, 92vw);
-      text-align: center;
       padding: 22px;
+      text-align: center;
     }
 
-    .artist-hero {
-      margin-bottom: 22px;
+    .artist-card {
+      background: linear-gradient(180deg, #242424, #181818);
+      border-radius: 28px;
+      padding: 24px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.55);
     }
 
-    .artist-logo {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 16px;
+    .artist-image {
+      width: 138px;
+      height: 138px;
+      margin: 0 auto 18px;
       border-radius: 50%;
-      background:
-        linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)),
-        url("https://clipper.com.uy/");
-      background-size: cover;
-      background-position: center;
-      border: 2px solid rgba(255,255,255,.25);
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      object-fit: cover;
+      background: #333;
+      box-shadow: 0 18px 45px rgba(0,0,0,.55);
     }
 
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
+    .spotify-label {
       color: #1DB954;
-      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-weight: 900;
       margin-bottom: 8px;
     }
 
@@ -62,23 +58,43 @@
       margin: 0;
       font-size: 34px;
       line-height: 1;
+      letter-spacing: -1px;
     }
 
     .subtitle {
-      color: #d0d0d0;
-      margin: 10px 0 26px;
-      line-height: 1.35;
+      margin: 10px auto 0;
+      color: #b3b3b3;
+      font-size: 15px;
+      line-height: 1.4;
+      max-width: 310px;
+    }
+
+    .spotify-pill {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #1DB954;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #1DB954;
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(29,185,84,.8);
     }
 
     .slot {
       height: 330px;
       overflow: hidden;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 24px;
+      background: #181818;
+      border: 1px solid rgba(255,255,255,.08);
       position: relative;
-      box-shadow: 0 24px 80px rgba(0,0,0,.55);
-      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 70px rgba(0,0,0,.55);
     }
 
     .slot::before {
@@ -87,30 +103,33 @@
       inset: 0;
       z-index: 3;
       pointer-events: none;
-      background:
-        linear-gradient(to bottom, rgba(5,5,5,.9), transparent 24%, transparent 76%, rgba(5,5,5,.9)),
-        linear-gradient(to right, rgba(255,255,255,.05), transparent 18%, transparent 82%, rgba(255,255,255,.05));
+      background: linear-gradient(
+        to bottom,
+        #181818 0%,
+        transparent 24%,
+        transparent 76%,
+        #181818 100%
+      );
     }
 
     .slot::after {
       content: "";
       position: absolute;
-      left: 10px;
-      right: 10px;
+      left: 12px;
+      right: 12px;
       top: 50%;
       height: 110px;
       transform: translateY(-50%);
       z-index: 4;
       pointer-events: none;
-      border-top: 2px solid rgba(29,185,84,.65);
-      border-bottom: 2px solid rgba(29,185,84,.65);
-      box-shadow: 0 0 32px rgba(29,185,84,.16);
       border-radius: 18px;
+      border: 2px solid rgba(29,185,84,.85);
+      box-shadow: 0 0 34px rgba(29,185,84,.25);
     }
 
     .track-list {
       transform: translateY(0);
-      transition: transform 4.8s cubic-bezier(.08,.82,.18,1);
+      transition: transform 5s cubic-bezier(.08,.82,.18,1);
     }
 
     .song {
@@ -120,17 +139,23 @@
       gap: 14px;
       padding: 0 18px;
       text-align: left;
-      opacity: .72;
+      background: #181818;
     }
 
     .song img {
-      width: 66px;
-      height: 66px;
-      border-radius: 14px;
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
       object-fit: cover;
+      background: #282828;
       flex-shrink: 0;
-      background: #222;
-      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+
+    .song-number {
+      color: #b3b3b3;
+      font-size: 13px;
+      width: 18px;
+      flex-shrink: 0;
     }
 
     .info {
@@ -139,9 +164,9 @@
     }
 
     .title {
-      font-weight: 900;
-      font-size: 17px;
-      line-height: 1.2;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
       margin-bottom: 5px;
       white-space: nowrap;
       overflow: hidden;
@@ -149,7 +174,7 @@
     }
 
     .artist {
-      color: #c7c7c7;
+      color: #b3b3b3;
       font-size: 14px;
       white-space: nowrap;
       overflow: hidden;
@@ -157,72 +182,149 @@
     }
 
     .status {
-      margin-top: 22px;
-      color: #d8d8d8;
+      margin-top: 20px;
+      color: #b3b3b3;
       font-size: 15px;
       min-height: 22px;
     }
 
     button {
-      margin-top: 20px;
-      padding: 15px 26px;
+      margin-top: 18px;
+      width: 100%;
+      padding: 16px 24px;
       border: none;
       border-radius: 999px;
       background: #1DB954;
-      color: white;
+      color: #000;
       font-weight: 900;
       font-size: 16px;
       cursor: pointer;
-      box-shadow: 0 12px 34px rgba(29,185,84,.28);
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    button:hover {
+      background: #1ed760;
+      transform: scale(1.02);
     }
 
     button:disabled {
-      opacity: .55;
+      opacity: .45;
       cursor: default;
+      transform: none;
     }
 
-    .winner-card {
-      display: none;
-      margin-top: 22px;
-      padding: 16px;
-      border-radius: 24px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.16);
-      text-align: left;
-      align-items: center;
-      gap: 14px;
-      backdrop-filter: blur(18px);
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(12px);
+      display: grid;
+      place-items: center;
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+      padding: 24px;
     }
 
-    .winner-card.show {
-      display: flex;
+    .popup-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .winner-card img {
-      width: 76px;
-      height: 76px;
-      border-radius: 16px;
-      object-fit: cover;
+    .popup {
+      width: min(390px, 92vw);
+      background: linear-gradient(180deg, #282828, #181818);
+      border-radius: 28px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(0,0,0,.75);
+      transform: translateY(18px) scale(.96);
+      transition: transform .25s ease;
+      border: 1px solid rgba(255,255,255,.08);
     }
 
-    .winner-label {
-      font-size: 12px;
+    .popup-overlay.show .popup {
+      transform: translateY(0) scale(1);
+    }
+
+    .popup-label {
       color: #1DB954;
+      font-size: 12px;
       font-weight: 900;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 5px;
+      margin-bottom: 14px;
+    }
+
+    .popup-cover {
+      width: 220px;
+      height: 220px;
+      max-width: 72vw;
+      max-height: 72vw;
+      border-radius: 18px;
+      object-fit: cover;
+      background: #333;
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      margin-bottom: 20px;
+    }
+
+    .popup-title {
+      font-size: 24px;
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: -0.6px;
+      margin-bottom: 8px;
+    }
+
+    .popup-artist {
+      color: #b3b3b3;
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .popup-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .spotify-button {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 999px;
+      background: #1DB954;
+      color: #000;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .secondary-button {
+      background: transparent;
+      color: #b3b3b3;
+      border: 1px solid rgba(255,255,255,.16);
+      margin-top: 0;
     }
   </style>
 </head>
 
 <body>
   <main class="container">
-    <section class="artist-hero">
-      <div class="artist-logo"></div>
-      <div class="eyebrow">Clipper presenta</div>
+    <section class="artist-card">
+      <img class="artist-image" src="./clipper.png" alt="Clipper">
+
+      <div class="spotify-label">NFC Music Drop</div>
       <h1>Te presto un tema</h1>
-      <p class="subtitle">Escaneaste el NFC. La ruleta elige una canción para vos.</p>
+      <p class="subtitle">
+        Escaneaste el NFC. La ruleta elige una canción de Clipper para vos.
+      </p>
+
+      <div class="spotify-pill">
+        <span class="dot"></span>
+        Powered by Spotify
+      </div>
     </section>
 
     <section class="slot">
@@ -232,19 +334,29 @@
     <div class="status" id="status">Cargando canciones...</div>
 
     <button id="spinButton" disabled>Tocar ruleta</button>
-
-    <div class="winner-card" id="winnerCard">
-      <img id="winnerImage" src="" alt="">
-      <div>
-        <div class="winner-label">Te tocó</div>
-        <div class="title" id="winnerTitle"></div>
-        <div class="artist" id="winnerArtist"></div>
-      </div>
-    </div>
   </main>
 
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <div class="popup-label">Esta canción es para vos</div>
+      <img class="popup-cover" id="popupImage" src="" alt="">
+      <div class="popup-title" id="popupTitle"></div>
+      <div class="popup-artist" id="popupArtist"></div>
+
+      <div class="popup-actions">
+        <a class="spotify-button" id="spotifyButton" href="#" target="_self">
+          Abrir en Spotify
+        </a>
+
+        <button class="secondary-button" id="closePopupButton">
+          Volver a girar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const songUrls = [
+     const songUrls = [
       "https://open.spotify.com/track/61TolqB1VKg9MY2LLvQWt5?si=78cd06a047fa4b93",
       "https://open.spotify.com/track/7HbsvzSYNJH0YpG3znMesG?si=70dce0c7f4a54531",
       "https://open.spotify.com/track/37dgB9iFTztNq2jcexYFDs?si=e22ceef252cf4774",
@@ -259,9 +371,9 @@
         "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH?si=adebc23fd31f4345",  
         
     ];
-  
 
-    const autoStart = false; // Para NFC: cambiar a true
+    const autoStart = true; // Para NFC: poner true
+    const autoRedirect = true; // Si querés que vaya solo a Spotify, poner true
 
     const itemHeight = 110;
     const visibleItems = 3;
@@ -273,18 +385,18 @@
     const spinButton = document.getElementById("spinButton");
     const statusText = document.getElementById("status");
 
-    const winnerCard = document.getElementById("winnerCard");
-    const winnerImage = document.getElementById("winnerImage");
-    const winnerTitle = document.getElementById("winnerTitle");
-    const winnerArtist = document.getElementById("winnerArtist");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupImage = document.getElementById("popupImage");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupArtist = document.getElementById("popupArtist");
+    const spotifyButton = document.getElementById("spotifyButton");
+    const closePopupButton = document.getElementById("closePopupButton");
 
     async function getSpotifyData(spotifyUrl) {
       const endpoint = `https://open.spotify.com/oembed?url=${encodeURIComponent(spotifyUrl)}`;
       const res = await fetch(endpoint);
 
-      if (!res.ok) {
-        throw new Error("No se pudo cargar metadata de Spotify");
-      }
+      if (!res.ok) throw new Error("No se pudo cargar metadata de Spotify");
 
       const data = await res.json();
       const parsed = parseSpotifyTitle(data.title);
@@ -315,16 +427,15 @@
     }
 
     async function loadSongs() {
-      return await Promise.all(
-        songUrls.map(url => getSpotifyData(url))
-      );
+      return await Promise.all(songUrls.map(url => getSpotifyData(url)));
     }
 
-    function createSongElement(song) {
+    function createSongElement(song, index) {
       const div = document.createElement("div");
       div.className = "song";
 
       div.innerHTML = `
+        <div class="song-number">${index + 1}</div>
         <img src="${song.image}" alt="${song.title}">
         <div class="info">
           <div class="title">${song.title}</div>
@@ -339,8 +450,8 @@
       trackList.innerHTML = "";
 
       for (let i = 0; i < loops; i++) {
-        songs.forEach(song => {
-          trackList.appendChild(createSongElement(song));
+        songs.forEach((song, index) => {
+          trackList.appendChild(createSongElement(song, index));
         });
       }
 
@@ -353,7 +464,7 @@
 
     function spin() {
       spinButton.disabled = true;
-      winnerCard.classList.remove("show");
+      popupOverlay.classList.remove("show");
       statusText.textContent = "Buscando el tema que te tocó...";
 
       const winnerIndex = Math.floor(Math.random() * songs.length);
@@ -374,18 +485,31 @@
 
       setTimeout(() => {
         const winner = songs[winnerIndex];
-
-        statusText.textContent = "Esta canción es para vos.";
-
-        winnerImage.src = winner.image;
-        winnerTitle.textContent = winner.title;
-        winnerArtist.textContent = winner.artist;
-        winnerCard.classList.add("show");
-
-        setTimeout(() => {
-          window.location.href = winner.url;
-        }, 2200);
+        showWinnerPopup(winner);
       }, 5200);
+    }
+
+    function showWinnerPopup(song) {
+      statusText.textContent = "Esta canción es para vos.";
+
+      popupImage.src = song.image;
+      popupTitle.textContent = song.title;
+      popupArtist.textContent = song.artist;
+      spotifyButton.href = song.url;
+
+      popupOverlay.classList.add("show");
+
+      if (autoRedirect) {
+        setTimeout(() => {
+          window.location.href = song.url;
+        }, 2500);
+      }
+    }
+
+    function closePopup() {
+      popupOverlay.classList.remove("show");
+      spinButton.disabled = false;
+      statusText.textContent = "Podés volver a girar.";
     }
 
     async function init() {
@@ -403,6 +527,7 @@
     }
 
     spinButton.addEventListener("click", spin);
+    closePopupButton.addEventListener("click", closePopup);
 
     init();
   </script>
