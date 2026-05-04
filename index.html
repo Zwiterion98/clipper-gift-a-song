@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Te presto un tema</title>
+
+  <script>
+    const canciones = [
+      "https://open.spotify.com/track/61TolqB1VKg9MY2LLvQWt5?si=78cd06a047fa4b93",
+      "https://open.spotify.com/track/7HbsvzSYNJH0YpG3znMesG?si=70dce0c7f4a54531",
+      "https://open.spotify.com/track/37dgB9iFTztNq2jcexYFDs?si=e22ceef252cf4774",
+      "https://open.spotify.com/track/6EOfT7JypEbWperfogUNXm?si=ab07c733fffb4f1d",
+        "https://open.spotify.com/track/2UZzTvm4JndQhOkFASv4SI?si=55a29b037efb4a28",    
+        "https://open.spotify.com/track/1o1pgZY1V0ZRDC44uKkoF6?si=293f4e442ca74d41",  
+        "https://open.spotify.com/track/0QFJQs8KibGpf0F7XLAjpi?si=5e3208c875144f36",  
+        "https://open.spotify.com/track/7tTFsAjBYrhJ8fVWKuNEOi?si=ae63089757364e88",  
+        "https://open.spotify.com/track/0ZuA1RkFBPqtkIQ0LqxsOW?si=557dbbc97e4a4687",  
+        "https://open.spotify.com/track/4mnI5RHeLuT64H7FKE3Blx?si=505353b3afdd4190",  
+        "https://open.spotify.com/track/0L9ZFTCXNSjJ09o5Z35ZyE?si=f8cec4e45255431b",  
+        "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH?si=adebc23fd31f4345",  
+        ];
+
+    function getRandomSong() {
+      const index = Math.floor(Math.random() * canciones.length);
+      return canciones[index];
+    }
+
+    window.onload = () => {
+      const song = getRandomSong();
+
+      // opcional: guardar cuál salió
+      console.log("Canción elegida:", song);
+
+      setTimeout(() => {
+        window.location.href = song;
+      }, 800);
+    };
+  </script>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Te presto un tema 🎧</h1>
+    <p>Eligiendo algo para vos...</p>
+  </div>
+</body>
+</html>
