@@ -3,98 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Te presto un tema</title>
+  <title>Clipper Music Drop</title>
 
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --clipper-blue: #3292b7;
+      --clipper-blue-dark: #1e6f91;
+      --black: #080808;
+      --soft-black: #111;
+      --white: #fff;
+      --spotify: #1DB954;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(29,185,84,.22), transparent 34%),
-        linear-gradient(180deg, #121212 0%, #000 100%);
-      color: #fff;
+      background: var(--clipper-blue);
+      color: var(--black);
       font-family: Arial, Helvetica, sans-serif;
-      display: grid;
-      place-items: center;
       overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle, rgba(0,0,0,.22) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      opacity: .28;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 46%, black 100%);
     }
 
     .container {
-      width: min(440px, 92vw);
-      padding: 22px;
+      width: min(440px, 100vw);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 34px 22px 20px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
-    .artist-card {
-      background: linear-gradient(180deg, #242424, #181818);
-      border-radius: 28px;
-      padding: 24px 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 24px 80px rgba(0,0,0,.55);
+    .brand-logo {
+      width: 250px;
+      max-width: 78vw;
+      margin: 0 auto 28px;
+      display: block;
     }
 
-    .artist-image {
-      width: 138px;
-      height: 138px;
-      margin: 0 auto 18px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #333;
-      box-shadow: 0 18px 45px rgba(0,0,0,.55);
-    }
-
-    .spotify-label {
-      color: #1DB954;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .14em;
+    .eyebrow {
+      color: var(--white);
+      font-size: 15px;
       font-weight: 900;
-      margin-bottom: 8px;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
     h1 {
-      margin: 0;
-      font-size: 34px;
-      line-height: 1;
-      letter-spacing: -1px;
+      color: var(--white);
+      margin: 0 0 20px;
+      font-size: 44px;
+      line-height: .95;
+      letter-spacing: .18em;
+      font-weight: 950;
+      text-transform: uppercase;
     }
 
     .subtitle {
-      margin: 10px auto 0;
-      color: #b3b3b3;
-      font-size: 15px;
-      line-height: 1.4;
-      max-width: 310px;
+      color: #000;
+      font-weight: 900;
+      font-size: 21px;
+      line-height: 1.32;
+      margin: 0 auto 32px;
+      max-width: 340px;
     }
 
-    .spotify-pill {
-      margin-top: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #1DB954;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: #1DB954;
-      border-radius: 50%;
-      box-shadow: 0 0 18px rgba(29,185,84,.8);
+    .slot-wrap {
+      position: relative;
+      margin-top: 10px;
     }
 
     .slot {
-      height: 330px;
+      height: 420px;
       overflow: hidden;
-      border-radius: 24px;
-      background: #181818;
-      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      background: rgba(0,0,0,.96);
       position: relative;
-      box-shadow: 0 20px 70px rgba(0,0,0,.55);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,.45),
+        inset 0 0 40px rgba(50,146,183,.08);
     }
 
     .slot::before {
@@ -103,28 +105,39 @@
       inset: 0;
       z-index: 3;
       pointer-events: none;
-      background: linear-gradient(
-        to bottom,
-        #181818 0%,
-        transparent 24%,
-        transparent 76%,
-        #181818 100%
-      );
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,.92) 0%,
+          rgba(0,0,0,.66) 18%,
+          rgba(0,0,0,.08) 38%,
+          rgba(0,0,0,.08) 62%,
+          rgba(0,0,0,.66) 82%,
+          rgba(0,0,0,.94) 100%
+        );
     }
 
     .slot::after {
       content: "";
       position: absolute;
-      left: 12px;
-      right: 12px;
+      left: -2px;
+      right: -2px;
       top: 50%;
       height: 110px;
       transform: translateY(-50%);
       z-index: 4;
       pointer-events: none;
-      border-radius: 18px;
-      border: 2px solid rgba(29,185,84,.85);
-      box-shadow: 0 0 34px rgba(29,185,84,.25);
+      border-top: 2px solid var(--clipper-blue);
+      border-bottom: 2px solid var(--clipper-blue);
+      box-shadow:
+        0 0 26px rgba(50,146,183,.7),
+        inset 0 0 28px rgba(50,146,183,.18);
+      background: linear-gradient(
+        90deg,
+        rgba(50,146,183,.10),
+        rgba(50,146,183,.03),
+        rgba(50,146,183,.10)
+      );
     }
 
     .track-list {
@@ -136,26 +149,30 @@
       height: 110px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 0 18px;
+      gap: 16px;
+      padding: 0 26px;
       text-align: left;
-      background: #181818;
-    }
-
-    .song img {
-      width: 64px;
-      height: 64px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: #282828;
-      flex-shrink: 0;
+      color: #fff;
+      background: transparent;
     }
 
     .song-number {
-      color: #b3b3b3;
-      font-size: 13px;
-      width: 18px;
+      width: 34px;
       flex-shrink: 0;
+      color: rgba(255,255,255,.62);
+      font-size: 22px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .song img {
+      width: 62px;
+      height: 62px;
+      border-radius: 9px;
+      object-fit: cover;
+      background: #222;
+      flex-shrink: 0;
+      box-shadow: 0 10px 26px rgba(0,0,0,.48);
     }
 
     .info {
@@ -164,60 +181,94 @@
     }
 
     .title {
-      font-size: 16px;
-      font-weight: 800;
+      font-size: 22px;
+      font-weight: 950;
       color: #fff;
       margin-bottom: 5px;
+      line-height: 1.05;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .artist {
-      color: #b3b3b3;
-      font-size: 14px;
+      color: rgba(255,255,255,.74);
+      font-size: 17px;
+      font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .status {
-      margin-top: 20px;
-      color: #b3b3b3;
+      margin-top: 28px;
+      color: #000;
       font-size: 15px;
+      font-weight: 950;
+      letter-spacing: .34em;
+      text-transform: uppercase;
       min-height: 22px;
     }
 
     button {
-      margin-top: 18px;
+      margin-top: 20px;
       width: 100%;
-      padding: 16px 24px;
+      padding: 19px 24px;
       border: none;
       border-radius: 999px;
-      background: #1DB954;
-      color: #000;
-      font-weight: 900;
-      font-size: 16px;
+      background: #080808;
+      color: #fff;
+      font-weight: 950;
+      font-size: 22px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
       cursor: pointer;
-      transition: transform .15s ease, background .15s ease;
-    }
-
-    button:hover {
-      background: #1ed760;
-      transform: scale(1.02);
+      box-shadow: 0 18px 46px rgba(0,0,0,.38);
     }
 
     button:disabled {
       opacity: .45;
       cursor: default;
-      transform: none;
+    }
+
+    .button-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .button-icon {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 20px 0 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .footer img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
     }
 
     .popup-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(14px);
       display: grid;
       place-items: center;
       z-index: 20;
@@ -234,27 +285,49 @@
 
     .popup {
       width: min(390px, 92vw);
-      background: linear-gradient(180deg, #282828, #181818);
+      background: linear-gradient(180deg, #141414, #050505);
       border-radius: 28px;
-      padding: 22px;
+      padding: 30px 24px 24px;
       text-align: center;
-      box-shadow: 0 30px 90px rgba(0,0,0,.75);
+      box-shadow: 0 34px 90px rgba(0,0,0,.8);
+      border: 1px solid rgba(255,255,255,.08);
+      position: relative;
+      overflow: hidden;
       transform: translateY(18px) scale(.96);
       transition: transform .25s ease;
-      border: 1px solid rgba(255,255,255,.08);
     }
 
     .popup-overlay.show .popup {
       transform: translateY(0) scale(1);
     }
 
+    .popup::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top, rgba(50,146,183,.28), transparent 42%);
+    }
+
+    .popup-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .popup-crown {
+      width: 90px;
+      margin: 0 auto 12px;
+      display: block;
+    }
+
     .popup-label {
-      color: #1DB954;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .12em;
+      color: var(--clipper-blue);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 20px;
     }
 
     .popup-cover {
@@ -262,143 +335,206 @@
       height: 220px;
       max-width: 72vw;
       max-height: 72vw;
-      border-radius: 18px;
+      border-radius: 16px;
       object-fit: cover;
       background: #333;
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
-      margin-bottom: 20px;
+      box-shadow: 0 22px 64px rgba(0,0,0,.6);
+      margin-bottom: 22px;
     }
 
     .popup-title {
-      font-size: 24px;
-      line-height: 1.1;
-      font-weight: 900;
-      letter-spacing: -0.6px;
+      color: #fff;
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 950;
+      letter-spacing: -0.8px;
       margin-bottom: 8px;
     }
 
     .popup-artist {
-      color: #b3b3b3;
-      font-size: 15px;
-      margin-bottom: 22px;
-    }
-
-    .popup-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      color: var(--clipper-blue);
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 24px;
     }
 
     .spotify-button {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
       width: 100%;
-      padding: 15px 20px;
+      padding: 16px 20px;
       border-radius: 999px;
-      background: #1DB954;
-      color: #000;
+      background: var(--clipper-blue);
+      color: #fff;
       text-decoration: none;
-      font-weight: 900;
+      font-weight: 950;
       font-size: 15px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .spotify-button img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
     }
 
     .secondary-button {
+      margin-top: 12px;
       background: transparent;
-      color: #b3b3b3;
-      border: 1px solid rgba(255,255,255,.16);
-      margin-top: 0;
+      color: #fff;
+      border: 2px solid var(--clipper-blue);
+      font-size: 14px;
+      letter-spacing: .12em;
+      padding: 15px 20px;
+    }
+
+    .scribble {
+      width: 170px;
+      height: 20px;
+      margin: 20px auto 0;
+      border-bottom: 6px solid var(--clipper-blue);
+      border-radius: 50%;
+      transform: rotate(-8deg);
     }
   </style>
 </head>
 
 <body>
   <main class="container">
-    <section class="artist-card">
-      <img class="artist-image" src="./clipper.webp" alt="Clipper">
 
-      <div class="spotify-label">NFC Music Drop</div>
-      <h1>Te regalo un tema</h1>
-      <p class="subtitle">
-        Escaneaste el NFC. La ruleta elige una canción de Clipper para vos.
-      </p>
+    <!-- 
+      ACÁ VA EL LOGO PRINCIPAL DE CLIPPER.
+      Usá una imagen tipo:
+      ./assets/logo-clipper-white.png
+      o el archivo que tengas como Logo_Clipper_FondoNegro / transparente.
+    -->
+    <img class="brand-logo" src="./assets/logo-clipper-white.png" alt="Clipper">
 
-      <div class="spotify-pill">
-        <span class="dot"></span>
-        Powered by Spotify
+    <div class="eyebrow">› Te regalo un tema ‹</div>
+    <h1>Music Drop</h1>
+
+    <p class="subtitle">
+      Escaneaste el NFC.<br>
+      La ruleta elige una canción para vos.
+    </p>
+
+    <section class="slot-wrap">
+      <div class="slot">
+        <div class="track-list" id="trackList"></div>
       </div>
     </section>
 
-    <section class="slot">
-      <div class="track-list" id="trackList"></div>
-    </section>
+    <div class="status" id="status">Preparando la ruleta...</div>
 
-    <div class="status" id="status">Cargando canciones...</div>
+    <button id="spinButton" disabled>
+      <span class="button-inner">
+        Tocar ruleta
 
-    <button id="spinButton" disabled>Tocar ruleta</button>
+        <!-- 
+          ACÁ VA EL ISOTIPO / CORONA DE CLIPPER.
+          Ejemplo:
+          ./assets/isotipo-clipper-blue.png
+        -->
+        <img class="button-icon" src="./assets/isotipo-clipper-blue.png" alt="">
+      </span>
+    </button>
+
+    <div class="footer">
+      <!-- 
+        ACÁ VA EL ISOTIPO / CORONA CHICA DE CLIPPER.
+        Ejemplo:
+        ./assets/isotipo-clipper-blue.png
+      -->
+      <img src="./assets/isotipo-clipper-blue.png" alt="">
+      <span>Powered by Spotify</span>
+    </div>
   </main>
 
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
-      <div class="popup-label">Esta canción es para vos</div>
-      <img class="popup-cover" id="popupImage" src="" alt="">
-      <div class="popup-title" id="popupTitle"></div>
-      <div class="popup-artist" id="popupArtist"></div>
+      <div class="popup-content">
 
-      <div class="popup-actions">
+        <!-- 
+          ACÁ VA EL ISOTIPO / CORONA DE CLIPPER PARA EL POPUP.
+          Ejemplo:
+          ./assets/isotipo-clipper-blue.png
+        -->
+        <img class="popup-crown" src="./assets/isotipo-clipper-blue.png" alt="">
+
+        <div class="popup-label">Esta canción es para vos</div>
+
+        <img class="popup-cover" id="popupImage" src="" alt="">
+
+        <div class="popup-title" id="popupTitle"></div>
+        <div class="popup-artist" id="popupArtist"></div>
+
         <a class="spotify-button" id="spotifyButton" href="#" target="_self">
-          Abrir en Spotify
+          <!-- 
+            ACÁ VA EL LOGO DE SPOTIFY.
+            Ideal en blanco.
+            Ejemplo:
+            ./assets/spotify-white.png
+          -->
+          <img src="./assets/spotify-white.png" alt="">
+          Escuchar en Spotify
         </a>
 
         <button class="secondary-button" id="closePopupButton">
           Volver a girar
         </button>
+
+        <div class="scribble"></div>
       </div>
     </div>
   </div>
 
   <script>
-     const songUrls = [
-  "https://open.spotify.com/track/7Mejmj7iPL8AYSLyh74T3z",
-  "https://open.spotify.com/track/0U8rdM2HKV0DBLjlTDodvY",
-  "https://open.spotify.com/track/1PoKzwgMyejDjblOIa51rK",
-  "https://open.spotify.com/track/5Gl9ixIjSWZHIlVUTB2tug",
-  "https://open.spotify.com/track/3ky00XWugW2okX8JAPoJqS",
-  "https://open.spotify.com/track/2BAOAtWQw28Df31CdQc3bL",
-  "https://open.spotify.com/track/6iVAyqPJq79DiAo6tyz3SD",
-  "https://open.spotify.com/track/0QFJQs8KibGpf0F7XLAjpi",
-  "https://open.spotify.com/track/15WCHwzhhGSoGX23Osx3VY",
-  "https://open.spotify.com/track/6f1zvPpPhUsJm96N3OuKLl",
-  "https://open.spotify.com/track/61TolqB1VKg9MY2LLvQWt5",
-  "https://open.spotify.com/track/1lFm3FyAQQvEy7NOLrWFnd",
-  "https://open.spotify.com/track/4Siu63PBuo7cdKNoVm4LNa",
-  "https://open.spotify.com/track/3AdwuTfhjFq1l62GWJfN9s",
-  "https://open.spotify.com/track/0Iwv3jG5rxp8B2AQM0n5QT",
-  "https://open.spotify.com/track/6EOfT7JypEbWperfogUNXm",
-  "https://open.spotify.com/track/4bK1CDdyVs0jYQ3kbfrIiA",
-  "https://open.spotify.com/track/7m3fQfXMv4HJNoCMRGwr6Z",
-  "https://open.spotify.com/track/37dgB9iFTztNq2jcexYFDs",
-  "https://open.spotify.com/track/2UZzTvm4JndQhOkFASv4SI",
-  "https://open.spotify.com/track/1o1pgZY1V0ZRDC44uKkoF6",
-  "https://open.spotify.com/track/0ZuA1RkFBPqtkIQ0LqxsOW",
-  "https://open.spotify.com/track/7tTFsAjBYrhJ8fVWKuNEOi",
-  "https://open.spotify.com/track/1L3f10jX030hfPkjpg0Sp5",
-  "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH",
-  "https://open.spotify.com/track/4mnI5RHeLuT64H7FKE3Blx",
-  "https://open.spotify.com/track/0L9ZFTCXNSjJ09o5Z35ZyE",
-  "https://open.spotify.com/track/7gBwf7josq8to4KqbD3ZTZ",
-  "https://open.spotify.com/track/2yIKndy6A79c14rdb1rodx",
-  "https://open.spotify.com/track/2t7jRpC4wbrpd6fyXFSAod",
-  "https://open.spotify.com/track/5FU4Ovg29LJbipYt0p5Q5f",
-  "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH",
-  "https://open.spotify.com/track/7HbsvzSYNJH0YpG3znMesG",
-  "https://open.spotify.com/track/2VF22nBOD8wXsnsdUDX4A6",
-  "https://open.spotify.com/track/2ZYAW1ejS9Wkx8Cz2Bm5Zz"
-];
+    const songUrls = [
+      "https://open.spotify.com/track/7Mejmj7iPL8AYSLyh74T3z",
+      "https://open.spotify.com/track/0U8rdM2HKV0DBLjlTDodvY",
+      "https://open.spotify.com/track/1PoKzwgMyejDjblOIa51rK",
+      "https://open.spotify.com/track/5Gl9ixIjSWZHIlVUTB2tug",
+      "https://open.spotify.com/track/3ky00XWugW2okX8JAPoJqS",
+      "https://open.spotify.com/track/2BAOAtWQw28Df31CdQc3bL",
+      "https://open.spotify.com/track/6iVAyqPJq79DiAo6tyz3SD",
+      "https://open.spotify.com/track/0QFJQs8KibGpf0F7XLAjpi",
+      "https://open.spotify.com/track/15WCHwzhhGSoGX23Osx3VY",
+      "https://open.spotify.com/track/6f1zvPpPhUsJm96N3OuKLl",
+      "https://open.spotify.com/track/61TolqB1VKg9MY2LLvQWt5",
+      "https://open.spotify.com/track/1lFm3FyAQQvEy7NOLrWFnd",
+      "https://open.spotify.com/track/4Siu63PBuo7cdKNoVm4LNa",
+      "https://open.spotify.com/track/3AdwuTfhjFq1l62GWJfN9s",
+      "https://open.spotify.com/track/0Iwv3jG5rxp8B2AQM0n5QT",
+      "https://open.spotify.com/track/6EOfT7JypEbWperfogUNXm",
+      "https://open.spotify.com/track/4bK1CDdyVs0jYQ3kbfrIiA",
+      "https://open.spotify.com/track/7m3fQfXMv4HJNoCMRGwr6Z",
+      "https://open.spotify.com/track/37dgB9iFTztNq2jcexYFDs",
+      "https://open.spotify.com/track/2UZzTvm4JndQhOkFASv4SI",
+      "https://open.spotify.com/track/1o1pgZY1V0ZRDC44uKkoF6",
+      "https://open.spotify.com/track/0ZuA1RkFBPqtkIQ0LqxsOW",
+      "https://open.spotify.com/track/7tTFsAjBYrhJ8fVWKuNEOi",
+      "https://open.spotify.com/track/1L3f10jX030hfPkjpg0Sp5",
+      "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH",
+      "https://open.spotify.com/track/4mnI5RHeLuT64H7FKE3Blx",
+      "https://open.spotify.com/track/0L9ZFTCXNSjJ09o5Z35ZyE",
+      "https://open.spotify.com/track/7gBwf7josq8to4KqbD3ZTZ",
+      "https://open.spotify.com/track/2yIKndy6A79c14rdb1rodx",
+      "https://open.spotify.com/track/2t7jRpC4wbrpd6fyXFSAod",
+      "https://open.spotify.com/track/5FU4Ovg29LJbipYt0p5Q5f",
+      "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH",
+      "https://open.spotify.com/track/7HbsvzSYNJH0YpG3znMesG",
+      "https://open.spotify.com/track/2VF22nBOD8wXsnsdUDX4A6",
+      "https://open.spotify.com/track/2ZYAW1ejS9Wkx8Cz2Bm5Zz"
+    ];
 
-    const autoStart = true; // Para NFC: poner true
-    const autoRedirect = true; // Si querés que vaya solo a Spotify, poner true
+    const autoStart = true;
+    const autoRedirect = true;
 
     const itemHeight = 110;
-    const visibleItems = 3;
+    const slotHeight = 420;
     const loops = 12;
 
     let songs = [];
@@ -444,7 +580,7 @@
 
       return {
         title: parts[0]?.trim() || rawTitle,
-        artist: parts[1]?.trim() || "Spotify"
+        artist: parts[1]?.trim() || "Clipper"
       };
     }
 
@@ -480,20 +616,20 @@
       trackList.style.transition = "none";
       trackList.style.transform = "translateY(0)";
 
-      statusText.textContent = "Listo para elegir tu tema.";
+      statusText.textContent = "Preparando la ruleta...";
       spinButton.disabled = false;
     }
 
     function spin() {
       spinButton.disabled = true;
       popupOverlay.classList.remove("show");
-      statusText.textContent = "Buscando el tema que te tocó...";
+      statusText.textContent = "Girando...";
 
       const winnerIndex = Math.floor(Math.random() * songs.length);
       const finalLoop = loops - 2;
       const finalIndex = finalLoop * songs.length + winnerIndex;
-      const centerOffset = Math.floor(visibleItems / 2) * itemHeight;
-      const finalPosition = (finalIndex * itemHeight) - centerOffset;
+     const centerOffset = (slotHeight / 2) - (itemHeight / 2);
+const finalPosition = (finalIndex * itemHeight) - centerOffset;
 
       trackList.style.transition = "none";
       trackList.style.transform = "translateY(0)";
@@ -512,7 +648,7 @@
     }
 
     function showWinnerPopup(song) {
-      statusText.textContent = "Esta canción es para vos.";
+      statusText.textContent = "Canción elegida";
 
       popupImage.src = song.image;
       popupTitle.textContent = song.title;
