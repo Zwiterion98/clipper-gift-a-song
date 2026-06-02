@@ -18,13 +18,14 @@
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--clipper-blue);
-      color: var(--black);
-      font-family: Arial, Helvetica, sans-serif;
-      overflow: hidden;
-    }
+  margin: 0;
+  min-height: 100vh;
+  background: var(--clipper-blue);
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
     body::before {
       content: "";
@@ -39,14 +40,14 @@
     }
 
     .container {
-      width: min(440px, 100vw);
-      min-height: 100vh;
-      margin: 0 auto;
-      padding: 34px 22px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+  width: min(440px, 100vw);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 34px 22px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
     .brand-logo {
       width: 250px;
