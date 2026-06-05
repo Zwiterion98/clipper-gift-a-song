@@ -520,6 +520,8 @@
   </div>
 
   <script>
+
+    
     const songUrls = [
       "https://open.spotify.com/track/7Mejmj7iPL8AYSLyh74T3z",
       "https://open.spotify.com/track/0U8rdM2HKV0DBLjlTDodvY",
@@ -557,7 +559,38 @@
       "https://open.spotify.com/track/2VF22nBOD8wXsnsdUDX4A6",
       "https://open.spotify.com/track/2ZYAW1ejS9Wkx8Cz2Bm5Zz"
     ];
+const SUPABASE_URL = "https://blpjtbewgbmtldzvplqx.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJscGp0YmV3Z2JtdGxkenZwbHF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MTUyNTMsImV4cCI6MjA5NjE5MTI1M30.oCvrgEFj13roM4r7dIrY9OdXnKlCRsNhsnKxpN8QnF0";
 
+const sessionId =
+  localStorage.getItem("clipper_session_id") ||
+  crypto.randomUUID();
+
+localStorage.setItem("clipper_session_id", sessionId);
+
+async function trackEvent(eventType, song = null) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/music_drop_events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({
+        event_type: eventType,
+        song_title: song?.title || null,
+        song_artist: song?.artist || null,
+        spotify_url: song?.url || null,
+        session_id: sessionId,
+        user_agent: navigator.userAgent,
+        referrer: document.referrer
+      })
+    });
+  } catch (error) {
+    console.warn("No se pudo trackear evento:", eventType);
+  }
+}
     const autoStart = true;
     const autoRedirect = false;
 
@@ -649,6 +682,7 @@
     }
 
     function spin() {
+      trackEvent("roulette_start");
       spinButton.disabled = true;
       popupOverlay.classList.remove("show");
       statusText.textContent = "Girando...";
@@ -676,6 +710,8 @@ const finalPosition = (finalIndex * itemHeight) - centerOffset;
     }
 
     function showWinnerPopup(song) {
+      currentWinner = song;
+trackEvent("roulette_result", song);
       statusText.textContent = "Canción elegida";
 
       popupImage.src = song.image;
@@ -693,29 +729,43 @@ const finalPosition = (finalIndex * itemHeight) - centerOffset;
     }
 
     function closePopup() {
+      trackEvent("roulette_retry", currentWinner);
       popupOverlay.classList.remove("show");
       spinButton.disabled = false;
       statusText.textContent = "Podés volver a girar.";
     }
 
     async function init() {
-      try {
-        songs = await loadSongs();
-        buildSlot();
+  try {
+    trackEvent("page_view");
 
-        if (autoStart) {
-          setTimeout(spin, 900);
-        }
-      } catch (error) {
-        console.error(error);
-        statusText.textContent = "No se pudieron cargar las canciones.";
-      }
+    songs = await loadSongs();
+    buildSlot();
+
+    if (autoStart) {
+      setTimeout(spin, 900);
     }
+  } catch (error) {
+    console.error(error);
+    statusText.textContent = "No se pudieron cargar las canciones.";
+  }
+}
 
     spinButton.addEventListener("click", spin);
     closePopupButton.addEventListener("click", closePopup);
+spotifyButton.addEventListener("click", () => {
+  trackEvent("spotify_click", currentWinner);
+});
 
+const instagramLink = document.querySelector(".instagram-text");
+
+if (instagramLink) {
+  instagramLink.addEventListener("click", () => {
+    trackEvent("instagram_click", currentWinner);
+  });
+}
     init();
+
   </script>
 </body>
 </html>
