@@ -400,6 +400,16 @@
       border-radius: 50%;
       transform: rotate(-8deg);
     }
+    .instagram-text {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  margin: 16px 0 0;
+}
+
+.instagram-text strong {
+  color: var(--clipper-blue);
+}
   </style>
 </head>
 
@@ -414,13 +424,13 @@
     -->
     <img class="brand-logo" src="./assets/logo-clipper-white.png" alt="Clipper">
 
-    <div class="eyebrow">› Te regalo un tema ‹</div>
-    <h1>Music Drop</h1>
+    <div class="eyebrow">› Te regalo una canción ‹</div>
+<h1>Osito de la suerte</h1>
 
-    <p class="subtitle">
-      Escaneaste el NFC.<br>
-      La ruleta elige una canción para vos.
-    </p>
+<p class="subtitle">
+  Escaneaste el osito de la suerte de Clipper.<br>
+  Te regalo una canción.
+</p>
 
     <section class="slot-wrap">
       <div class="slot">
@@ -465,7 +475,10 @@
         -->
         <img class="popup-crown" src="./assets/isotipo-clipper-blue.png" alt="">
 
-        <div class="popup-label">Esta canción es para vos</div>
+        <div class="popup-label">
+  Todas mis canciones tienen un mensaje muy específico.<br>
+  La que te tocó, por algo es.
+</div>
 
         <img class="popup-cover" id="popupImage" src="" alt="">
 
@@ -486,7 +499,9 @@
         <button class="secondary-button" id="closePopupButton">
           Volver a girar
         </button>
-
+<p class="instagram-text">
+  Seguime en <strong>@clipper.jta</strong>
+</p>
         <div class="scribble"></div>
       </div>
     </div>
@@ -532,7 +547,7 @@
     ];
 
     const autoStart = true;
-    const autoRedirect = true;
+    const autoRedirect = false;
 
     const itemHeight = 110;
     const slotHeight = 420;
