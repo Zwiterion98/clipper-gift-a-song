@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0
   <meta name="theme-color" content="#120206" />
   <meta
     name="description"
@@ -99,7 +99,7 @@
     .floating-texture span {
       position: absolute;
       color: rgba(255, 109, 136, .18);
-      font-size: 42px;
+          font-size: 42px;
       font-weight: 900;
       text-shadow: 0 0 22px rgba(224, 9, 38, .28);
       animation: drift 12s ease-in-out infinite alternate;
@@ -479,183 +479,17 @@
       box-shadow: 0 0 26px rgba(224, 9, 38, .54);
     }
 
-    .unlock-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .unlock-card {
-      min-height: 112px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      border: 1px solid rgba(255, 255, 255, .12);
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)),
-        rgba(0, 0, 0, .28);
-      box-shadow: inset 0 0 24px rgba(224, 9, 38, .08);
-    }
-
-    .unlock-icon {
-      display: grid;
-      place-items: center;
-      width: 46px;
-      height: 46px;
-      flex: 0 0 auto;
-      border: 1px solid rgba(255, 255, 255, .18);
-      color: var(--red-hot);
-      background: rgba(224, 9, 38, .12);
-      font-size: 23px;
-      font-weight: 950;
-      text-shadow: 0 0 16px rgba(255, 24, 54, .74);
-    }
-
-    .unlock-card h3 {
-      margin: 0;
-      color: var(--paper);
-      font-size: 20px;
-      line-height: 1.1;
-      font-weight: 950;
-    }
-
-    .share-layout {
-      display: grid;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .share-copy {
-      text-align: center;
-    }
-
-    .share-copy h2,
-    .unlock-title {
-      margin-bottom: 18px;
-      color: var(--paper);
-      font-size: 34px;
-      line-height: .95;
-      font-weight: 950;
-      letter-spacing: 0;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .share-copy p {
-      margin-bottom: 24px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.36;
-      font-weight: 800;
-    }
-
-    .story-card {
-      width: min(78vw, 310px);
-      aspect-ratio: 9 / 16;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .16);
-      background:
-        linear-gradient(180deg, rgba(255, 24, 54, .32), transparent 32%),
-        linear-gradient(160deg, #21050a, #050305 54%, #36070f);
-      box-shadow: var(--shadow), var(--glow);
-    }
-
-    .story-card::before {
-      content: "CUPIDO CUPIDO CUPIDO";
-      position: absolute;
-      left: -44%;
-      top: 48%;
-      width: 188%;
-      color: rgba(255, 255, 255, .08);
-      font-size: 32px;
-      font-weight: 950;
-      letter-spacing: .14em;
-      text-align: center;
-      transform: rotate(-18deg);
-      white-space: nowrap;
-    }
-
-    .story-card-inner {
-      position: absolute;
-      inset: 18px;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 14px;
-      z-index: 1;
-    }
-
-    .story-card-top {
-      display: flex;
-      justify-content: space-between;
-      color: var(--paper);
-      font-size: 12px;
-      font-weight: 950;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    .story-cover {
-      align-self: center;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, .18);
-      box-shadow: 0 18px 46px rgba(0, 0, 0, .52);
-    }
-
-    .story-card-bottom {
-      display: grid;
-      gap: 6px;
-      text-align: center;
-    }
-
-    .story-card-bottom strong {
-      color: var(--paper);
-      font-size: 39px;
-      line-height: .86;
-      font-weight: 950;
-      text-transform: uppercase;
-      text-shadow: 0 0 14px rgba(255, 24, 54, .62);
-    }
-
-    .story-card-bottom span {
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    .final-cta {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-      padding: 58px 0 76px;
-      text-align: center;
-    }
-
-    .final-cta h2 {
-      margin-bottom: 20px;
-      color: var(--paper);
-      font-size: 34px;
-      line-height: .96;
-      font-weight: 950;
-      letter-spacing: 0;
-      text-transform: uppercase;
-    }
-
     .site-footer {
       position: relative;
       z-index: 1;
       border-top: 1px solid rgba(255, 255, 255, .1);
-      background: rgba(0, 0, 0, .42);
+      background: rgba(0, 0, 0, .36);
     }
 
     .footer-inner {
       width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
-      padding: 26px 0;
+      padding: 28px 0 34px;
       display: grid;
       gap: 18px;
       text-align: center;
@@ -681,6 +515,13 @@
       font-size: 13px;
       font-weight: 850;
       text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--paper);
+      text-shadow: 0 0 18px rgba(255, 24, 54, .56);
     }
 
     .reveal {
@@ -769,39 +610,6 @@
         font-size: 25px;
       }
 
-      .unlock-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .share-copy h2,
-      .unlock-title {
-        font-size: 60px;
-      }
-
-      .unlock-card {
-        display: grid;
-        align-content: start;
-        min-height: 164px;
-      }
-
-      .share-layout {
-        grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
-        gap: 54px;
-      }
-
-      .share-copy,
-      .share-copy h2 {
-        text-align: left;
-      }
-
-      .story-card {
-        width: min(100%, 330px);
-      }
-
-      .final-cta h2 {
-        font-size: 68px;
-      }
-
       .footer-inner {
         grid-template-columns: 1fr auto;
         align-items: center;
@@ -812,7 +620,6 @@
     @media (max-width: 380px) {
       .header-inner,
       .section,
-      .final-cta,
       .footer-inner {
         width: min(var(--max), calc(100% - 24px));
       }
@@ -829,10 +636,6 @@
 
       .button {
         font-size: 13px;
-      }
-
-      .story-card-bottom strong {
-        font-size: 33px;
       }
     }
 
@@ -949,64 +752,6 @@
           </a>
         </div>
       </section>
-
-      <section class="section reveal" aria-labelledby="unlock-title">
-        <h2 class="unlock-title" id="unlock-title">Al pre-savear desbloque&aacute;s</h2>
-        <div class="unlock-grid">
-          <article class="unlock-card">
-            <span class="unlock-icon" aria-hidden="true">&ldquo;</span>
-            <h3>Frase in&eacute;dita</h3>
-          </article>
-          <article class="unlock-card">
-            <span class="unlock-icon" aria-hidden="true">HD</span>
-            <h3>Wallpaper HD</h3>
-          </article>
-          <article class="unlock-card">
-            <span class="unlock-icon" aria-hidden="true">&hearts;</span>
-            <h3>Story card para compartir</h3>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal" aria-labelledby="share-title">
-        <div class="share-layout">
-          <div class="story-card" id="storyCard" aria-label="Vista previa de story card CUPIDO">
-            <div class="story-card-inner">
-              <div class="story-card-top">
-                <span>CLIPPER</span>
-                <span>7 AGO</span>
-              </div>
-              <img class="story-cover js-cover" src="./clipper.webp" alt="Portada usada en la story card de CUPIDO" />
-              <div class="story-card-bottom">
-                <strong>CUPIDO</strong>
-                <span>Pre-save activado</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="share-copy">
-            <h2 id="share-title">Compart&iacute; que ya activaste el drop</h2>
-            <p>Activ&aacute; el drop. S&eacute; parte antes de que salga.</p>
-            <div class="cta-row">
-              <button class="button" id="downloadStoryButton" type="button">
-                Descargar story card <span class="arrow" aria-hidden="true">&darr;</span>
-              </button>
-              <button class="button secondary" id="shareButton" type="button">
-                Compartir <span class="arrow" aria-hidden="true">&rarr;</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="final-cta reveal" aria-label="Pre-save final">
-        <h2>Activ&aacute; el drop. S&eacute; parte antes de que salga.</h2>
-        <div class="cta-row">
-          <a class="button presave-link" href="https://orcd.co/wrcc2026s" target="_blank" rel="noopener noreferrer">
-            PRE-SAVE AHORA <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -1021,7 +766,6 @@
   </div>
 
   <script>
-    const PRESAVE_URL = "https://orcd.co/wrcc2026s";
     const coverCandidates = [
       "./assets/cupido.webp",
       "./assets/cupido.jpg",
@@ -1033,8 +777,6 @@
       "./assets/CUPIDO.png",
       "./clipper.webp"
     ];
-
-    let activeCoverSrc = "./clipper.webp";
 
     function getNextReleaseDate() {
       const now = new Date();
@@ -1086,7 +828,6 @@
       for (const candidate of coverCandidates) {
         const found = await imageExists(candidate);
         if (found) {
-          activeCoverSrc = found;
           document.querySelectorAll(".js-cover").forEach((image) => {
             image.src = found;
           });
@@ -1137,123 +878,6 @@
         }
       }, { passive: true });
     }
-
-    function loadCanvasImage(src) {
-      return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.onload = () => resolve(image);
-        image.onerror = reject;
-        image.src = src;
-      });
-    }
-
-    function drawCoverContain(ctx, image, x, y, size) {
-      const scale = Math.min(size / image.width, size / image.height);
-      const width = image.width * scale;
-      const height = image.height * scale;
-      const offsetX = x + (size - width) / 2;
-      const offsetY = y + (size - height) / 2;
-
-      ctx.fillStyle = "#130207";
-      ctx.fillRect(x, y, size, size);
-      ctx.drawImage(image, offsetX, offsetY, width, height);
-    }
-
-    async function downloadStoryCard() {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1080;
-      canvas.height = 1920;
-      const ctx = canvas.getContext("2d");
-      const cover = await loadCanvasImage(activeCoverSrc);
-
-      const gradient = ctx.createLinearGradient(0, 0, 1080, 1920);
-      gradient.addColorStop(0, "#5a0612");
-      gradient.addColorStop(.45, "#070204");
-      gradient.addColorStop(1, "#26040a");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 1080, 1920);
-
-      ctx.globalAlpha = .18;
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "900 88px Arial";
-      ctx.translate(-180, 1080);
-      ctx.rotate(-Math.PI / 10);
-      ctx.fillText("CUPIDO  CUPIDO  CUPIDO", 0, 0);
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.globalAlpha = 1;
-
-      ctx.strokeStyle = "rgba(255, 255, 255, .32)";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(76, 76, 928, 1768);
-
-      ctx.fillStyle = "#fff6f7";
-      ctx.font = "900 46px Arial";
-      ctx.letterSpacing = "4px";
-      ctx.fillText("CLIPPER", 110, 158);
-
-      ctx.textAlign = "right";
-      ctx.fillText("7 AGO", 970, 158);
-      ctx.textAlign = "left";
-
-      drawCoverContain(ctx, cover, 150, 376, 780);
-      ctx.strokeStyle = "rgba(255, 255, 255, .34)";
-      ctx.lineWidth = 3;
-      ctx.strokeRect(150, 376, 780, 780);
-
-      ctx.textAlign = "center";
-      ctx.fillStyle = "#fff6f7";
-      ctx.shadowColor = "rgba(255, 24, 54, .72)";
-      ctx.shadowBlur = 24;
-      ctx.font = "900 156px Arial";
-      ctx.fillText("CUPIDO", 540, 1378);
-
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = "rgba(255, 246, 247, .78)";
-      ctx.font = "900 38px Arial";
-      ctx.fillText("PRE-SAVE ACTIVADO", 540, 1450);
-
-      ctx.fillStyle = "#ff1836";
-      ctx.fillRect(190, 1538, 700, 8);
-
-      ctx.fillStyle = "#fff6f7";
-      ctx.font = "900 42px Arial";
-      ctx.fillText("orcd.co/wrcc2026s", 540, 1668);
-
-      const link = document.createElement("a");
-      link.download = "clipper-cupido-story-card.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    }
-
-    async function shareDrop() {
-      const shareData = {
-        title: "CLIPPER - CUPIDO",
-        text: "Activ&aacute; el pre-save de CUPIDO, el nuevo single de CLIPPER.",
-        url: PRESAVE_URL
-      };
-
-      if (navigator.share) {
-        await navigator.share(shareData);
-        return;
-      }
-
-      await navigator.clipboard.writeText(PRESAVE_URL);
-      const shareButton = document.getElementById("shareButton");
-      shareButton.firstChild.textContent = "Link copiado ";
-      setTimeout(() => {
-        shareButton.firstChild.textContent = "Compartir ";
-      }, 1800);
-    }
-
-    document.getElementById("downloadStoryButton").addEventListener("click", () => {
-      downloadStoryCard().catch(() => {
-        window.open(activeCoverSrc, "_blank", "noopener,noreferrer");
-      });
-    });
-
-    document.getElementById("shareButton").addEventListener("click", () => {
-      shareDrop().catch(() => window.open(PRESAVE_URL, "_blank", "noopener,noreferrer"));
-    });
 
     document.querySelectorAll(".presave-link").forEach((link) => {
       link.addEventListener("click", () => {
