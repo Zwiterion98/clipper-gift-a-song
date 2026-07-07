@@ -3,769 +3,1269 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clipper Music Drop</title>
+  <meta name="theme-color" content="#120206" />
+  <meta
+    name="description"
+    content="CLIPPER presenta CUPIDO. Nuevo single en camino. Activ&aacute; el pre-save antes del 7 de agosto."
+  />
+  <title>CLIPPER - CUPIDO Pre-Save</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     :root {
-      --clipper-blue: #3292b7;
-      --clipper-blue-dark: #1e6f91;
-      --black: #080808;
-      --soft-black: #111;
-      --white: #fff;
-      --spotify: #1DB954;
+      --black: #050305;
+      --ink: #0b0406;
+      --wine: #21050a;
+      --red-dark: #570914;
+      --red: #e00926;
+      --red-hot: #ff1836;
+      --rose: #ff6d88;
+      --paper: #fff6f7;
+      --muted: rgba(255, 246, 247, .72);
+      --line: rgba(255, 255, 255, .14);
+      --shadow: 0 22px 70px rgba(0, 0, 0, .48);
+      --glow: 0 0 26px rgba(255, 24, 54, .46), 0 0 60px rgba(224, 9, 38, .26);
+      --max: 1080px;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--clipper-blue);
-  color: var(--black);
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+      margin: 0;
+      min-height: 100vh;
+      color: var(--paper);
+      background:
+        linear-gradient(180deg, rgba(87, 9, 20, .26), transparent 36%),
+        repeating-linear-gradient(102deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 9px),
+        radial-gradient(circle at 50% 0%, rgba(224, 9, 38, .28), transparent 35%),
+        linear-gradient(180deg, #120206 0%, #050305 42%, #100206 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
+      z-index: -2;
       pointer-events: none;
       background:
-        radial-gradient(circle, rgba(0,0,0,.22) 1.5px, transparent 1.5px);
-      background-size: 12px 12px;
+        radial-gradient(circle, rgba(255, 255, 255, .09) 1px, transparent 1px),
+        repeating-linear-gradient(0deg, transparent 0 16px, rgba(255, 255, 255, .03) 16px 17px);
+      background-size: 18px 18px, 100% 17px;
       opacity: .28;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 46%, black 100%);
+      mix-blend-mode: screen;
     }
 
-    .container {
-  width: min(440px, 100vw);
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 34px 22px 40px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-    .brand-logo {
-      width: 250px;
-      max-width: 78vw;
-      margin: 0 auto 28px;
-      display: block;
-    }
-
-    .eyebrow {
-      color: var(--white);
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      color: var(--white);
-      margin: 0 0 20px;
-      font-size: 44px;
-      line-height: .95;
-      letter-spacing: .18em;
-      font-weight: 950;
-      text-transform: uppercase;
-    }
-
-    .subtitle {
-      color: #000;
-      font-weight: 900;
-      font-size: 21px;
-      line-height: 1.32;
-      margin: 0 auto 32px;
-      max-width: 340px;
-    }
-
-    .slot-wrap {
-      position: relative;
-      margin-top: 10px;
-    }
-
-    .slot {
-      height: 420px;
-      overflow: hidden;
-      border-radius: 28px;
-      background: rgba(0,0,0,.96);
-      position: relative;
-      box-shadow:
-        0 28px 80px rgba(0,0,0,.45),
-        inset 0 0 40px rgba(50,146,183,.08);
-    }
-
-    .slot::before {
+    body::after {
       content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,.92) 0%,
-          rgba(0,0,0,.66) 18%,
-          rgba(0,0,0,.08) 38%,
-          rgba(0,0,0,.08) 62%,
-          rgba(0,0,0,.66) 82%,
-          rgba(0,0,0,.94) 100%
-        );
-    }
-
-    .slot::after {
-      content: "";
-      position: absolute;
-      left: -2px;
-      right: -2px;
-      top: 50%;
-      height: 110px;
-      transform: translateY(-50%);
-      z-index: 4;
-      pointer-events: none;
-      border-top: 2px solid var(--clipper-blue);
-      border-bottom: 2px solid var(--clipper-blue);
-      box-shadow:
-        0 0 26px rgba(50,146,183,.7),
-        inset 0 0 28px rgba(50,146,183,.18);
-      background: linear-gradient(
-        90deg,
-        rgba(50,146,183,.10),
-        rgba(50,146,183,.03),
-        rgba(50,146,183,.10)
-      );
-    }
-
-    .track-list {
-      transform: translateY(0);
-      transition: transform 5s cubic-bezier(.08,.82,.18,1);
-    }
-
-    .song {
-      height: 110px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 0 26px;
-      text-align: left;
-      color: #fff;
-      background: transparent;
-    }
-
-    .song-number {
-      width: 34px;
-      flex-shrink: 0;
-      color: rgba(255,255,255,.62);
-      font-size: 22px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .song img {
-      width: 62px;
-      height: 62px;
-      border-radius: 9px;
-      object-fit: cover;
-      background: #222;
-      flex-shrink: 0;
-      box-shadow: 0 10px 26px rgba(0,0,0,.48);
-    }
-
-    .info {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .title {
-      font-size: 22px;
-      font-weight: 950;
-      color: #fff;
-      margin-bottom: 5px;
-      line-height: 1.05;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .artist {
-      color: rgba(255,255,255,.74);
-      font-size: 17px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .status {
-      margin-top: 28px;
-      color: #000;
-      font-size: 15px;
-      font-weight: 950;
-      letter-spacing: .34em;
-      text-transform: uppercase;
-      min-height: 22px;
-    }
-
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 19px 24px;
-      border: none;
-      border-radius: 999px;
-      background: #080808;
-      color: #fff;
-      font-weight: 950;
-      font-size: 22px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 18px 46px rgba(0,0,0,.38);
-    }
-
-    button:disabled {
-      opacity: .45;
-      cursor: default;
-    }
-
-    .button-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-    }
-
-    .button-icon {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-    }
-
-    .footer {
-      margin-top: 28px;
-      padding: 20px 0 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      color: #fff;
-      font-weight: 900;
-      letter-spacing: .26em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-
-    .footer img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-    }
-
-    .popup-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.78);
-      backdrop-filter: blur(14px);
-      display: grid;
-      place-items: center;
-      z-index: 20;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .25s ease;
-      padding: 24px;
-    }
-
-    .popup-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .popup {
-      width: min(390px, 92vw);
-      background: linear-gradient(180deg, #141414, #050505);
-      border-radius: 28px;
-      padding: 30px 24px 24px;
-      text-align: center;
-      box-shadow: 0 34px 90px rgba(0,0,0,.8);
-      border: 1px solid rgba(255,255,255,.08);
-      position: relative;
-      overflow: hidden;
-      transform: translateY(18px) scale(.96);
-      transition: transform .25s ease;
-    }
-
-    .popup-overlay.show .popup {
-      transform: translateY(0) scale(1);
-    }
-
-    .popup::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(circle at top, rgba(50,146,183,.28), transparent 42%);
+        linear-gradient(90deg, rgba(0, 0, 0, .74), transparent 20%, transparent 80%, rgba(0, 0, 0, .78)),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, .42) 100%);
     }
 
-    .popup-content {
-      position: relative;
-      z-index: 1;
+    a {
+      color: inherit;
     }
 
-    .popup-crown {
-      width: 90px;
-      margin: 0 auto 12px;
+    img {
       display: block;
+      max-width: 100%;
     }
 
-    .popup-label {
-      color: var(--clipper-blue);
-      font-size: 13px;
-      font-weight: 950;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
+    .page-shell {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
     }
 
-    .popup-cover {
-      width: 220px;
-      height: 220px;
-      max-width: 72vw;
-      max-height: 72vw;
-      border-radius: 16px;
-      object-fit: cover;
-      background: #333;
-      box-shadow: 0 22px 64px rgba(0,0,0,.6);
-      margin-bottom: 22px;
+    .floating-texture {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
 
-    .popup-title {
-      color: #fff;
-      font-size: 30px;
-      line-height: 1.05;
-      font-weight: 950;
-      letter-spacing: -0.8px;
-      margin-bottom: 8px;
+    .floating-texture span {
+      position: absolute;
+      color: rgba(255, 109, 136, .18);
+      font-size: 42px;
+      font-weight: 900;
+      text-shadow: 0 0 22px rgba(224, 9, 38, .28);
+      animation: drift 12s ease-in-out infinite alternate;
     }
 
-    .popup-artist {
-      color: var(--clipper-blue);
-      font-size: 19px;
-      font-weight: 800;
-      margin-bottom: 24px;
+    .floating-texture span:nth-child(1) {
+      top: 11%;
+      left: 4%;
     }
 
-    .spotify-button {
+    .floating-texture span:nth-child(2) {
+      top: 23%;
+      right: 7%;
+      animation-delay: -4s;
+    }
+
+    .floating-texture span:nth-child(3) {
+      top: 65%;
+      left: 6%;
+      animation-delay: -7s;
+    }
+
+    .floating-texture span:nth-child(4) {
+      right: 9%;
+      bottom: 12%;
+      animation-delay: -2s;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(5, 3, 5, .76);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      width: min(var(--max), calc(100% - 32px));
+      min-height: 66px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      padding: 16px 20px;
-      border-radius: 999px;
-      background: var(--clipper-blue);
-      color: #fff;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--paper);
       text-decoration: none;
+      font-size: 18px;
       font-weight: 950;
-      font-size: 15px;
+      letter-spacing: .22em;
+      line-height: 1;
+    }
+
+    .brand-mark {
+      width: 11px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--red-hot);
+      box-shadow: var(--glow);
+      transform: rotate(21deg);
+    }
+
+    .nav-cta {
+      flex: 0 0 auto;
+      padding: 12px 15px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 999px;
+      color: var(--paper);
+      background: rgba(255, 255, 255, .07);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 950;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
 
-    .spotify-button img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
+    main {
+      position: relative;
+      z-index: 1;
     }
 
-    .secondary-button {
-      margin-top: 12px;
-      background: transparent;
-      color: #fff;
-      border: 2px solid var(--clipper-blue);
-      font-size: 14px;
+    .section {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 64px 0;
+    }
+
+    .hero {
+      min-height: calc(100svh - 132px);
+      padding-top: 28px;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-art {
+      width: min(86vw, 430px);
+      margin: 0 auto;
+      position: relative;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .hero-art::before,
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .hero-art::before {
+      inset: -12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      box-shadow:
+        0 0 0 1px rgba(224, 9, 38, .18),
+        var(--glow),
+        var(--shadow);
+      transform: rotate(-2deg);
+    }
+
+    .hero-art::after {
+      inset: 10px -18px auto auto;
+      width: 96px;
+      height: 96px;
+      border-top: 2px solid rgba(255, 255, 255, .78);
+      border-right: 2px solid rgba(255, 109, 136, .8);
+      transform: rotate(30deg);
+      opacity: .7;
+    }
+
+    .cover-frame {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .16);
+      background: #140307;
+      box-shadow: var(--shadow);
+    }
+
+    .cover-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover-frame .stamp {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, .24);
+      color: var(--paper);
+      background: rgba(0, 0, 0, .58);
+      font-size: 11px;
+      font-weight: 950;
       letter-spacing: .12em;
-      padding: 15px 20px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
     }
 
-    .scribble {
-      width: 170px;
-      height: 20px;
-      margin: 20px auto 0;
-      border-bottom: 6px solid var(--clipper-blue);
-      border-radius: 50%;
-      transform: rotate(-8deg);
+    .hero-copy {
+      text-align: center;
     }
- .instagram-text {
-  display: inline-block;
-  color: #fff;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 800;
-  margin: 16px 0 0;
-  transition: opacity .2s ease;
-}
 
-.instagram-text:hover {
-  opacity: .8;
-}
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+    }
 
-.instagram-text strong {
-  color: var(--clipper-blue);
-}
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: var(--paper);
+      font-size: 64px;
+      line-height: .82;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 12px rgba(224, 9, 38, .62),
+        0 9px 0 rgba(77, 5, 15, .78);
+    }
+
+    .hero-subtitle {
+      margin-bottom: 10px;
+      color: var(--paper);
+      font-size: 24px;
+      line-height: 1.08;
+      font-weight: 950;
+    }
+
+    .release-date {
+      width: fit-content;
+      margin: 0 auto 22px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      color: var(--muted);
+      background: rgba(255, 255, 255, .05);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .cta-row {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: min(100%, 390px);
+      padding: 17px 22px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 999px;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(255, 95, 116, .24), transparent),
+        linear-gradient(135deg, var(--red-hot), #9a0619);
+      box-shadow: var(--glow), 0 18px 44px rgba(0, 0, 0, .36);
+      appearance: none;
+      font-family: inherit;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 0 34px rgba(255, 24, 54, .64), 0 22px 54px rgba(0, 0, 0, .42);
+    }
+
+    .button.secondary {
+      width: min(100%, 330px);
+      color: var(--paper);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: none;
+      animation: none;
+    }
+
+    .arrow {
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .scroll-hint {
+      margin: 28px auto 0;
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(180deg, var(--red-hot), transparent);
+    }
+
+    .countdown-section {
+      padding-top: 28px;
+    }
+
+    .countdown-wrap {
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      padding: 26px 0;
+      background:
+        linear-gradient(90deg, transparent, rgba(224, 9, 38, .16), transparent),
+        rgba(0, 0, 0, .16);
+    }
+
+    .section-label {
+      margin-bottom: 18px;
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .24em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .time-box {
+      min-height: 104px;
+      padding: 16px 8px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .07), transparent),
+        rgba(8, 1, 4, .78);
+      box-shadow: inset 0 0 28px rgba(224, 9, 38, .12);
+    }
+
+    .time-value {
+      color: #fff;
+      font-size: 42px;
+      line-height: .9;
+      font-weight: 950;
+      text-shadow: 0 0 20px rgba(255, 24, 54, .5);
+    }
+
+    .time-label {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .storyline {
+      display: grid;
+      gap: 22px;
+    }
+
+    .quote {
+      margin-bottom: 0;
+      color: var(--paper);
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .narrative {
+      margin: 0 auto;
+      max-width: 740px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.36;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .divider {
+      width: min(240px, 54vw);
+      height: 9px;
+      margin: 6px auto 0;
+      background:
+        linear-gradient(90deg, transparent 0 8%, var(--red-hot) 8% 44%, transparent 44% 53%, var(--paper) 53% 100%);
+      transform: rotate(-2deg);
+      box-shadow: 0 0 26px rgba(224, 9, 38, .54);
+    }
+
+    .unlock-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .unlock-card {
+      min-height: 112px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)),
+        rgba(0, 0, 0, .28);
+      box-shadow: inset 0 0 24px rgba(224, 9, 38, .08);
+    }
+
+    .unlock-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, .18);
+      color: var(--red-hot);
+      background: rgba(224, 9, 38, .12);
+      font-size: 23px;
+      font-weight: 950;
+      text-shadow: 0 0 16px rgba(255, 24, 54, .74);
+    }
+
+    .unlock-card h3 {
+      margin: 0;
+      color: var(--paper);
+      font-size: 20px;
+      line-height: 1.1;
+      font-weight: 950;
+    }
+
+    .share-layout {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .share-copy {
+      text-align: center;
+    }
+
+    .share-copy h2,
+    .unlock-title {
+      margin-bottom: 18px;
+      color: var(--paper);
+      font-size: 34px;
+      line-height: .95;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .share-copy p {
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.36;
+      font-weight: 800;
+    }
+
+    .story-card {
+      width: min(78vw, 310px);
+      aspect-ratio: 9 / 16;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .16);
+      background:
+        linear-gradient(180deg, rgba(255, 24, 54, .32), transparent 32%),
+        linear-gradient(160deg, #21050a, #050305 54%, #36070f);
+      box-shadow: var(--shadow), var(--glow);
+    }
+
+    .story-card::before {
+      content: "CUPIDO CUPIDO CUPIDO";
+      position: absolute;
+      left: -44%;
+      top: 48%;
+      width: 188%;
+      color: rgba(255, 255, 255, .08);
+      font-size: 32px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-align: center;
+      transform: rotate(-18deg);
+      white-space: nowrap;
+    }
+
+    .story-card-inner {
+      position: absolute;
+      inset: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      z-index: 1;
+    }
+
+    .story-card-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--paper);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .story-cover {
+      align-self: center;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, .52);
+    }
+
+    .story-card-bottom {
+      display: grid;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .story-card-bottom strong {
+      color: var(--paper);
+      font-size: 39px;
+      line-height: .86;
+      font-weight: 950;
+      text-transform: uppercase;
+      text-shadow: 0 0 14px rgba(255, 24, 54, .62);
+    }
+
+    .story-card-bottom span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .final-cta {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 58px 0 76px;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      margin-bottom: 20px;
+      color: var(--paper);
+      font-size: 34px;
+      line-height: .96;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .site-footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(0, 0, 0, .42);
+    }
+
+    .footer-inner {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0;
+      display: grid;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      color: var(--paper);
+      font-size: 17px;
+      font-weight: 950;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 20px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        box-shadow: var(--glow), 0 18px 44px rgba(0, 0, 0, .36);
+      }
+
+      50% {
+        box-shadow: 0 0 38px rgba(255, 24, 54, .64), 0 0 80px rgba(224, 9, 38, .34), 0 18px 44px rgba(0, 0, 0, .38);
+      }
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(0, 0, 0) rotate(-8deg);
+      }
+
+      to {
+        transform: translate3d(0, -22px, 0) rotate(8deg);
+      }
+    }
+
+    @media (min-width: 720px) {
+      .section {
+        padding: 88px 0;
+      }
+
+      .floating-texture span {
+        font-size: 76px;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(280px, 430px) minmax(0, 1fr);
+        gap: 58px;
+      }
+
+      h1 {
+        font-size: 132px;
+      }
+
+      .hero-subtitle {
+        font-size: 34px;
+      }
+
+      .hero-copy {
+        text-align: left;
+      }
+
+      .release-date {
+        margin-left: 0;
+      }
+
+      .cta-row {
+        justify-items: start;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .time-value {
+        font-size: 72px;
+      }
+
+      .storyline {
+        gap: 30px;
+      }
+
+      .quote {
+        font-size: 58px;
+      }
+
+      .narrative {
+        font-size: 25px;
+      }
+
+      .unlock-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .share-copy h2,
+      .unlock-title {
+        font-size: 60px;
+      }
+
+      .unlock-card {
+        display: grid;
+        align-content: start;
+        min-height: 164px;
+      }
+
+      .share-layout {
+        grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+        gap: 54px;
+      }
+
+      .share-copy,
+      .share-copy h2 {
+        text-align: left;
+      }
+
+      .story-card {
+        width: min(100%, 330px);
+      }
+
+      .final-cta h2 {
+        font-size: 68px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .header-inner,
+      .section,
+      .final-cta,
+      .footer-inner {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .brand {
+        font-size: 16px;
+        letter-spacing: .16em;
+      }
+
+      .nav-cta {
+        padding-inline: 12px;
+        font-size: 10px;
+      }
+
+      .button {
+        font-size: 13px;
+      }
+
+      .story-card-bottom strong {
+        font-size: 33px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <main class="container">
-
-    <!-- 
-      ACÁ VA EL LOGO PRINCIPAL DE CLIPPER.
-      Usá una imagen tipo:
-      ./assets/logo-clipper-white.png
-      o el archivo que tengas como Logo_Clipper_FondoNegro / transparente.
-    -->
-    <img class="brand-logo" src="./assets/logo-clipper-white.png" alt="Clipper">
-
-    <div class="eyebrow">› Te regalo una canción ‹</div>
-<h1>Osito de la suerte</h1>
-
-<p class="subtitle">
-  Escaneaste el osito de la suerte de Clipper.<br>
-  Te regalo una canción.
-</p>
-
-    <section class="slot-wrap">
-      <div class="slot">
-        <div class="track-list" id="trackList"></div>
-      </div>
-    </section>
-
-    <div class="status" id="status">Preparando la ruleta...</div>
-
-    <button id="spinButton" disabled>
-      <span class="button-inner">
-        Tocar ruleta
-
-        <!-- 
-          ACÁ VA EL ISOTIPO / CORONA DE CLIPPER.
-          Ejemplo:
-          ./assets/isotipo-clipper-blue.png
-        -->
-        <img class="button-icon" src="./assets/isotipo-clipper-blue.png" alt="">
-      </span>
-    </button>
-
-    <div class="footer">
-      <!-- 
-        ACÁ VA EL ISOTIPO / CORONA CHICA DE CLIPPER.
-        Ejemplo:
-        ./assets/isotipo-clipper-blue.png
-      -->
-      <img src="./assets/isotipo-clipper-blue.png" alt="">
-      <span>Powered by Spotify</span>
+  <div class="page-shell">
+    <div class="floating-texture" aria-hidden="true">
+      <span>&hearts;</span>
+      <span>&rarr;</span>
+      <span>&hearts;</span>
+      <span>&#8725;</span>
     </div>
-  </main>
 
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup">
-      <div class="popup-content">
-
-        <!-- 
-          ACÁ VA EL ISOTIPO / CORONA DE CLIPPER PARA EL POPUP.
-          Ejemplo:
-          ./assets/isotipo-clipper-blue.png
-        -->
-        <img class="popup-crown" src="./assets/isotipo-clipper-blue.png" alt="">
-
-        <div class="popup-label">
-  Todas mis canciones tienen un mensaje muy específico.<br>
-  La que te tocó, por algo es.
-</div>
-
-        <img class="popup-cover" id="popupImage" src="" alt="">
-
-        <div class="popup-title" id="popupTitle"></div>
-        <div class="popup-artist" id="popupArtist"></div>
-
-        <a class="spotify-button" id="spotifyButton" href="#" target="_self">
-          <!-- 
-            ACÁ VA EL LOGO DE SPOTIFY.
-            Ideal en blanco.
-            Ejemplo:
-            ./assets/spotify-white.png
-          -->
-          <img src="./assets/spotify-white.png" alt="">
-          Escuchar en Spotify
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="CLIPPER">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>CLIPPER</span>
         </a>
-
-        <button class="secondary-button" id="closePopupButton">
-          Volver a girar
-        </button>
-<a
-  class="instagram-text"
-  href="https://www.instagram.com/clipper.jta/?hl=es"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Seguime en <strong>@clipper.jta</strong>
-</a>
-        <div class="scribble"></div>
+        <a class="nav-cta" href="https://orcd.co/wrcc2026s" target="_blank" rel="noopener noreferrer">
+          Pre-save
+        </a>
       </div>
-    </div>
+    </header>
+
+    <main id="top">
+      <section class="section hero" aria-labelledby="hero-title">
+        <div class="hero-grid">
+          <div class="hero-art" id="heroArt">
+            <div class="cover-frame">
+              <img
+                class="js-cover"
+                src="./clipper.webp"
+                alt="Imagen principal del single CUPIDO de CLIPPER"
+                width="1200"
+                height="1200"
+              />
+              <span class="stamp">7 de agosto</span>
+            </div>
+          </div>
+
+          <div class="hero-copy">
+            <p class="kicker">CLIPPER</p>
+            <h1 id="hero-title">CUPIDO</h1>
+            <p class="hero-subtitle">Nuevo single en camino</p>
+            <p class="release-date">7 de agosto</p>
+            <div class="cta-row">
+              <a class="button presave-link" href="https://orcd.co/wrcc2026s" target="_blank" rel="noopener noreferrer">
+                PRE-SAVE AHORA <span class="arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            <div class="scroll-hint" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section countdown-section reveal" aria-labelledby="countdown-title">
+        <div class="countdown-wrap">
+          <p class="section-label" id="countdown-title">Cuenta regresiva</p>
+          <div class="countdown" aria-live="polite">
+            <div class="time-box">
+              <div>
+                <div class="time-value" id="days">00</div>
+                <div class="time-label">D&iacute;as</div>
+              </div>
+            </div>
+            <div class="time-box">
+              <div>
+                <div class="time-value" id="hours">00</div>
+                <div class="time-label">Horas</div>
+              </div>
+            </div>
+            <div class="time-box">
+              <div>
+                <div class="time-value" id="minutes">00</div>
+                <div class="time-label">Minutos</div>
+              </div>
+            </div>
+            <div class="time-box">
+              <div>
+                <div class="time-value" id="seconds">00</div>
+                <div class="time-label">Segundos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section storyline reveal" aria-label="Historia de CUPIDO">
+        <p class="quote">Qui&eacute;n ser&aacute; ese tal Cupido ? - Pr&oacute;ximamente</p>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="narrative">
+          Mi nuevo single est&aacute; por salir. Una historia sobre un culpable que nadie ve: un borracho invisible que reparte flechas, confusi&oacute;n y corazones rotos.
+        </p>
+        <div class="cta-row">
+          <a class="button presave-link" href="https://orcd.co/wrcc2026s" target="_blank" rel="noopener noreferrer">
+            PRE-SAVE AHORA <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section reveal" aria-labelledby="unlock-title">
+        <h2 class="unlock-title" id="unlock-title">Al pre-savear desbloque&aacute;s</h2>
+        <div class="unlock-grid">
+          <article class="unlock-card">
+            <span class="unlock-icon" aria-hidden="true">&ldquo;</span>
+            <h3>Frase in&eacute;dita</h3>
+          </article>
+          <article class="unlock-card">
+            <span class="unlock-icon" aria-hidden="true">HD</span>
+            <h3>Wallpaper HD</h3>
+          </article>
+          <article class="unlock-card">
+            <span class="unlock-icon" aria-hidden="true">&hearts;</span>
+            <h3>Story card para compartir</h3>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" aria-labelledby="share-title">
+        <div class="share-layout">
+          <div class="story-card" id="storyCard" aria-label="Vista previa de story card CUPIDO">
+            <div class="story-card-inner">
+              <div class="story-card-top">
+                <span>CLIPPER</span>
+                <span>7 AGO</span>
+              </div>
+              <img class="story-cover js-cover" src="./clipper.webp" alt="Portada usada en la story card de CUPIDO" />
+              <div class="story-card-bottom">
+                <strong>CUPIDO</strong>
+                <span>Pre-save activado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="share-copy">
+            <h2 id="share-title">Compart&iacute; que ya activaste el drop</h2>
+            <p>Activ&aacute; el drop. S&eacute; parte antes de que salga.</p>
+            <div class="cta-row">
+              <button class="button" id="downloadStoryButton" type="button">
+                Descargar story card <span class="arrow" aria-hidden="true">&darr;</span>
+              </button>
+              <button class="button secondary" id="shareButton" type="button">
+                Compartir <span class="arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta reveal" aria-label="Pre-save final">
+        <h2>Activ&aacute; el drop. S&eacute; parte antes de que salga.</h2>
+        <div class="cta-row">
+          <a class="button presave-link" href="https://orcd.co/wrcc2026s" target="_blank" rel="noopener noreferrer">
+            PRE-SAVE AHORA <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">CLIPPER</div>
+        <nav class="footer-links" aria-label="Redes y links de CLIPPER">
+          <a href="https://www.instagram.com/clipper.jta/?hl=es" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://orcd.co/wrcc2026s" target="_blank" rel="noopener noreferrer">Pre-save</a>
+        </nav>
+      </div>
+    </footer>
   </div>
 
   <script>
-
-    
-    const songUrls = [
-      "https://open.spotify.com/track/7Mejmj7iPL8AYSLyh74T3z",
-      "https://open.spotify.com/track/0U8rdM2HKV0DBLjlTDodvY",
-      "https://open.spotify.com/track/1PoKzwgMyejDjblOIa51rK",
-      "https://open.spotify.com/track/5Gl9ixIjSWZHIlVUTB2tug",
-      "https://open.spotify.com/track/3ky00XWugW2okX8JAPoJqS",
-      "https://open.spotify.com/track/2BAOAtWQw28Df31CdQc3bL",
-      "https://open.spotify.com/track/6iVAyqPJq79DiAo6tyz3SD",
-      "https://open.spotify.com/track/0QFJQs8KibGpf0F7XLAjpi",
-      "https://open.spotify.com/track/15WCHwzhhGSoGX23Osx3VY",
-      "https://open.spotify.com/track/6f1zvPpPhUsJm96N3OuKLl",
-      "https://open.spotify.com/track/61TolqB1VKg9MY2LLvQWt5",
-      "https://open.spotify.com/track/1lFm3FyAQQvEy7NOLrWFnd",
-      "https://open.spotify.com/track/4Siu63PBuo7cdKNoVm4LNa",
-      "https://open.spotify.com/track/3AdwuTfhjFq1l62GWJfN9s",
-      "https://open.spotify.com/track/0Iwv3jG5rxp8B2AQM0n5QT",
-      "https://open.spotify.com/track/6EOfT7JypEbWperfogUNXm",
-      "https://open.spotify.com/track/4bK1CDdyVs0jYQ3kbfrIiA",
-      "https://open.spotify.com/track/7m3fQfXMv4HJNoCMRGwr6Z",
-      "https://open.spotify.com/track/37dgB9iFTztNq2jcexYFDs",
-      "https://open.spotify.com/track/2UZzTvm4JndQhOkFASv4SI",
-      "https://open.spotify.com/track/1o1pgZY1V0ZRDC44uKkoF6",
-      "https://open.spotify.com/track/0ZuA1RkFBPqtkIQ0LqxsOW",
-      "https://open.spotify.com/track/7tTFsAjBYrhJ8fVWKuNEOi",
-      "https://open.spotify.com/track/1L3f10jX030hfPkjpg0Sp5",
-      "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH",
-      "https://open.spotify.com/track/4mnI5RHeLuT64H7FKE3Blx",
-      "https://open.spotify.com/track/0L9ZFTCXNSjJ09o5Z35ZyE",
-      "https://open.spotify.com/track/7gBwf7josq8to4KqbD3ZTZ",
-      "https://open.spotify.com/track/2yIKndy6A79c14rdb1rodx",
-      "https://open.spotify.com/track/2t7jRpC4wbrpd6fyXFSAod",
-      "https://open.spotify.com/track/5FU4Ovg29LJbipYt0p5Q5f",
-      "https://open.spotify.com/track/0ZMiR70FrvQDBx0hrn9pVH",
-      "https://open.spotify.com/track/7HbsvzSYNJH0YpG3znMesG",
-      "https://open.spotify.com/track/2VF22nBOD8wXsnsdUDX4A6",
-      "https://open.spotify.com/track/2ZYAW1ejS9Wkx8Cz2Bm5Zz"
+    const PRESAVE_URL = "https://orcd.co/wrcc2026s";
+    const coverCandidates = [
+      "./assets/cupido.webp",
+      "./assets/cupido.jpg",
+      "./assets/cupido.jpeg",
+      "./assets/cupido.png",
+      "./assets/CUPIDO.webp",
+      "./assets/CUPIDO.jpg",
+      "./assets/CUPIDO.jpeg",
+      "./assets/CUPIDO.png",
+      "./clipper.webp"
     ];
-const SUPABASE_URL = "https://blpjtbewgbmtldzvplqx.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJscGp0YmV3Z2JtdGxkenZwbHF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MTUyNTMsImV4cCI6MjA5NjE5MTI1M30.oCvrgEFj13roM4r7dIrY9OdXnKlCRsNhsnKxpN8QnF0";
 
-const sessionId =
-  localStorage.getItem("clipper_session_id") ||
-  crypto.randomUUID();
+    let activeCoverSrc = "./clipper.webp";
 
-localStorage.setItem("clipper_session_id", sessionId);
+    function getNextReleaseDate() {
+      const now = new Date();
+      let releaseDate = new Date(now.getFullYear(), 7, 7, 0, 0, 0);
 
-async function trackEvent(eventType, song = null) {
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/music_drop_events`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-      },
-      body: JSON.stringify({
-        event_type: eventType,
-        song_title: song?.title || null,
-        song_artist: song?.artist || null,
-        spotify_url: song?.url || null,
-        session_id: sessionId,
-        user_agent: navigator.userAgent,
-        referrer: document.referrer
-      })
-    });
-  } catch (error) {
-    console.warn("No se pudo trackear evento:", eventType);
-  }
-}
-    const autoStart = false;
-    const autoRedirect = false;
-
-    const itemHeight = 110;
-    const slotHeight = 420;
-    const loops = 12;
-
-    let songs = [];
-
-    const trackList = document.getElementById("trackList");
-    const spinButton = document.getElementById("spinButton");
-    const statusText = document.getElementById("status");
-
-    const popupOverlay = document.getElementById("popupOverlay");
-    const popupImage = document.getElementById("popupImage");
-    const popupTitle = document.getElementById("popupTitle");
-    const popupArtist = document.getElementById("popupArtist");
-    const spotifyButton = document.getElementById("spotifyButton");
-    const closePopupButton = document.getElementById("closePopupButton");
-
-    async function getSpotifyData(spotifyUrl) {
-      const endpoint = `https://open.spotify.com/oembed?url=${encodeURIComponent(spotifyUrl)}`;
-      const res = await fetch(endpoint);
-
-      if (!res.ok) throw new Error("No se pudo cargar metadata de Spotify");
-
-      const data = await res.json();
-      const parsed = parseSpotifyTitle(data.title);
-
-      return {
-        title: parsed.title,
-        artist: parsed.artist,
-        image: data.thumbnail_url,
-        url: spotifyUrl
-      };
-    }
-
-    function parseSpotifyTitle(rawTitle) {
-      let clean = rawTitle || "Canción de Spotify";
-
-      clean = clean
-        .replace(" - song and lyrics by ", "|||")
-        .replace(" - canción y letra de ", "|||")
-        .replace(" - song by ", "|||")
-        .replace(" - canción de ", "|||");
-
-      const parts = clean.split("|||");
-
-      return {
-        title: parts[0]?.trim() || rawTitle,
-        artist: parts[1]?.trim() || "Clipper"
-      };
-    }
-
-    async function loadSongs() {
-      return await Promise.all(songUrls.map(url => getSpotifyData(url)));
-    }
-
-    function createSongElement(song, index) {
-      const div = document.createElement("div");
-      div.className = "song";
-
-      div.innerHTML = `
-        <div class="song-number">${index + 1}</div>
-        <img src="${song.image}" alt="${song.title}">
-        <div class="info">
-          <div class="title">${song.title}</div>
-          <div class="artist">${song.artist}</div>
-        </div>
-      `;
-
-      return div;
-    }
-
-    function buildSlot() {
-      trackList.innerHTML = "";
-
-      for (let i = 0; i < loops; i++) {
-        songs.forEach((song, index) => {
-          trackList.appendChild(createSongElement(song, index));
-        });
+      if (releaseDate <= now) {
+        releaseDate = new Date(now.getFullYear() + 1, 7, 7, 0, 0, 0);
       }
 
-      trackList.style.transition = "none";
-      trackList.style.transform = "translateY(0)";
-
-      statusText.textContent = "Preparando la ruleta...";
-      spinButton.disabled = false;
+      return releaseDate;
     }
 
-    function spin() {
-      trackEvent("roulette_start");
-      spinButton.disabled = true;
-      popupOverlay.classList.remove("show");
-      statusText.textContent = "Girando...";
+    const releaseDate = getNextReleaseDate();
+    const timeNodes = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds")
+    };
 
-      const winnerIndex = Math.floor(Math.random() * songs.length);
-      const finalLoop = loops - 2;
-      const finalIndex = finalLoop * songs.length + winnerIndex;
-     const centerOffset = (slotHeight / 2) - (itemHeight / 2);
-const finalPosition = (finalIndex * itemHeight) - centerOffset;
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
 
-      trackList.style.transition = "none";
-      trackList.style.transform = "translateY(0)";
+    function updateCountdown() {
+      const remaining = Math.max(0, releaseDate.getTime() - Date.now());
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          trackList.style.transition = "transform 5s cubic-bezier(.08,.82,.18,1)";
-          trackList.style.transform = `translateY(-${finalPosition}px)`;
-        });
+      timeNodes.days.textContent = pad(days);
+      timeNodes.hours.textContent = pad(hours);
+      timeNodes.minutes.textContent = pad(minutes);
+      timeNodes.seconds.textContent = pad(seconds);
+    }
+
+    function imageExists(src) {
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => resolve(src);
+        image.onerror = () => resolve(null);
+        image.src = src;
       });
-
-      setTimeout(() => {
-        const winner = songs[winnerIndex];
-        showWinnerPopup(winner);
-      }, 5200);
     }
 
-    function showWinnerPopup(song) {
-      currentWinner = song;
-trackEvent("roulette_result", song);
-      statusText.textContent = "Canción elegida";
-
-      popupImage.src = song.image;
-      popupTitle.textContent = song.title;
-      popupArtist.textContent = song.artist;
-      spotifyButton.href = song.url;
-
-      popupOverlay.classList.add("show");
-
-      if (autoRedirect) {
-        setTimeout(() => {
-          window.location.href = song.url;
-        }, 2500);
+    async function resolveCover() {
+      for (const candidate of coverCandidates) {
+        const found = await imageExists(candidate);
+        if (found) {
+          activeCoverSrc = found;
+          document.querySelectorAll(".js-cover").forEach((image) => {
+            image.src = found;
+          });
+          return;
+        }
       }
     }
 
-    function closePopup() {
-      trackEvent("roulette_retry", currentWinner);
-      popupOverlay.classList.remove("show");
-      spinButton.disabled = false;
-      statusText.textContent = "Podés volver a girar.";
+    function setupReveal() {
+      const revealItems = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .16 });
+
+      revealItems.forEach((item) => observer.observe(item));
     }
 
-    async function init() {
-  try {
-    trackEvent("page_view");
+    function setupParallax() {
+      const heroArt = document.getElementById("heroArt");
 
-    songs = await loadSongs();
-    buildSlot();
+      if (!heroArt || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
 
-    if (autoStart) {
-      setTimeout(spin, 900);
+      let ticking = false;
+
+      function update() {
+        const offset = Math.min(42, window.scrollY * .08);
+        heroArt.style.transform = `translate3d(0, ${offset}px, 0)`;
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
     }
-  } catch (error) {
-    console.error(error);
-    statusText.textContent = "No se pudieron cargar las canciones.";
-  }
-}
 
-    spinButton.addEventListener("click", spin);
-    closePopupButton.addEventListener("click", closePopup);
-spotifyButton.addEventListener("click", () => {
-  trackEvent("spotify_click", currentWinner);
-});
+    function loadCanvasImage(src) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
+      });
+    }
 
-const instagramLink = document.querySelector(".instagram-text");
+    function drawCoverContain(ctx, image, x, y, size) {
+      const scale = Math.min(size / image.width, size / image.height);
+      const width = image.width * scale;
+      const height = image.height * scale;
+      const offsetX = x + (size - width) / 2;
+      const offsetY = y + (size - height) / 2;
 
-if (instagramLink) {
-  instagramLink.addEventListener("click", () => {
-    trackEvent("instagram_click", currentWinner);
-  });
-}
-    init();
+      ctx.fillStyle = "#130207";
+      ctx.fillRect(x, y, size, size);
+      ctx.drawImage(image, offsetX, offsetY, width, height);
+    }
 
+    async function downloadStoryCard() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext("2d");
+      const cover = await loadCanvasImage(activeCoverSrc);
+
+      const gradient = ctx.createLinearGradient(0, 0, 1080, 1920);
+      gradient.addColorStop(0, "#5a0612");
+      gradient.addColorStop(.45, "#070204");
+      gradient.addColorStop(1, "#26040a");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      ctx.globalAlpha = .18;
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 88px Arial";
+      ctx.translate(-180, 1080);
+      ctx.rotate(-Math.PI / 10);
+      ctx.fillText("CUPIDO  CUPIDO  CUPIDO", 0, 0);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.globalAlpha = 1;
+
+      ctx.strokeStyle = "rgba(255, 255, 255, .32)";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(76, 76, 928, 1768);
+
+      ctx.fillStyle = "#fff6f7";
+      ctx.font = "900 46px Arial";
+      ctx.letterSpacing = "4px";
+      ctx.fillText("CLIPPER", 110, 158);
+
+      ctx.textAlign = "right";
+      ctx.fillText("7 AGO", 970, 158);
+      ctx.textAlign = "left";
+
+      drawCoverContain(ctx, cover, 150, 376, 780);
+      ctx.strokeStyle = "rgba(255, 255, 255, .34)";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(150, 376, 780, 780);
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#fff6f7";
+      ctx.shadowColor = "rgba(255, 24, 54, .72)";
+      ctx.shadowBlur = 24;
+      ctx.font = "900 156px Arial";
+      ctx.fillText("CUPIDO", 540, 1378);
+
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "rgba(255, 246, 247, .78)";
+      ctx.font = "900 38px Arial";
+      ctx.fillText("PRE-SAVE ACTIVADO", 540, 1450);
+
+      ctx.fillStyle = "#ff1836";
+      ctx.fillRect(190, 1538, 700, 8);
+
+      ctx.fillStyle = "#fff6f7";
+      ctx.font = "900 42px Arial";
+      ctx.fillText("orcd.co/wrcc2026s", 540, 1668);
+
+      const link = document.createElement("a");
+      link.download = "clipper-cupido-story-card.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    async function shareDrop() {
+      const shareData = {
+        title: "CLIPPER - CUPIDO",
+        text: "Activ&aacute; el pre-save de CUPIDO, el nuevo single de CLIPPER.",
+        url: PRESAVE_URL
+      };
+
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+
+      await navigator.clipboard.writeText(PRESAVE_URL);
+      const shareButton = document.getElementById("shareButton");
+      shareButton.firstChild.textContent = "Link copiado ";
+      setTimeout(() => {
+        shareButton.firstChild.textContent = "Compartir ";
+      }, 1800);
+    }
+
+    document.getElementById("downloadStoryButton").addEventListener("click", () => {
+      downloadStoryCard().catch(() => {
+        window.open(activeCoverSrc, "_blank", "noopener,noreferrer");
+      });
+    });
+
+    document.getElementById("shareButton").addEventListener("click", () => {
+      shareDrop().catch(() => window.open(PRESAVE_URL, "_blank", "noopener,noreferrer"));
+    });
+
+    document.querySelectorAll(".presave-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        link.blur();
+      });
+    });
+
+    resolveCover();
+    setupReveal();
+    setupParallax();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
