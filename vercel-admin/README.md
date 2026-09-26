@@ -2,6 +2,16 @@
 
 Panel privado para cambiar el destino de la redirección pública de CLIPPER.
 
+## Producción
+
+- Panel: `https://clipper-redirect-admin.vercel.app/admin`
+- Proyecto: `zwiterion98s-projects/clipper-redirect-admin`
+- Almacenamiento: Vercel Blob privado `clipper-redirect-config` (`gru1`)
+- Web pública autorizada: `https://zwiterion98.github.io`
+
+La contraseña se guarda solamente en `admin-access.local.txt`, ignorado por Git.
+Compartir el enlace y la contraseña por mensajes separados.
+
 ## Despliegue en Vercel
 
 1. Crear un proyecto de Vercel usando `vercel-admin` como Root Directory.
