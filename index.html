@@ -50,6 +50,7 @@
 
     <script>
       const defaultUrl = "https://linktr.ee/clipper.jta?utm_source=qr_code";
+      const remoteConfigUrl = "https://clipper-redirect-admin.vercel.app/api/destination";
       const fallbackLink = document.getElementById("fallbackLink");
       const message = document.getElementById("message");
 
@@ -62,12 +63,14 @@
         }
       }
 
-      async function redirect() {
-        let destination = defaultUrl;
+      async function loadDestination(url, timeoutMs = 2500) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
         try {
-          const response = await fetch(`./redirect-config.json?v=${Date.now()}`, {
-            cache: "no-store"
+          const response = await fetch(url, {
+            cache: "no-store",
+            signal: controller.signal
           });
 
           if (!response.ok) {
@@ -75,11 +78,27 @@
           }
 
           const config = await response.json();
-          if (isSafeUrl(config.url)) {
-            destination = config.url;
+          if (!isSafeUrl(config.url)) {
+            throw new Error("El destino configurado no es válido.");
           }
-        } catch {
-          message.textContent = "No se pudo cargar el destino actualizado. Continuando…";
+
+          return config.url;
+        } finally {
+          clearTimeout(timeout);
+        }
+      }
+
+      async function redirect() {
+        let destination = defaultUrl;
+
+        try {
+          destination = await loadDestination(`${remoteConfigUrl}?v=${Date.now()}`);
+        } catch (remoteError) {
+          try {
+            destination = await loadDestination(`./redirect-config.json?v=${Date.now()}`);
+          } catch (localError) {
+            message.textContent = "No se pudo cargar el destino actualizado. Continuando…";
+          }
         }
 
         fallbackLink.href = destination;
