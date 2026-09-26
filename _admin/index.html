@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#3292b7">
+    <title>CLIPPER — Configurar redirección</title>
+
+    <style>
+      :root {
+        color-scheme: dark;
+        --blue: #3292b7;
+        --blue-dark: #1f718f;
+        --black: #080808;
+        --white: #ffffff;
+        --muted: rgba(255, 255, 255, 0.72);
+        --line: rgba(255, 255, 255, 0.22);
+        --success: #72e29d;
+        --error: #ff9eaa;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: var(--white);
+        background:
+          radial-gradient(circle at 50% 0%, rgba(50, 146, 183, 0.72), transparent 42%),
+          var(--black);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      main {
+        width: min(100%, 540px);
+        padding: clamp(28px, 7vw, 52px);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: rgba(8, 8, 8, 0.9);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+      }
+
+      .logo {
+        display: block;
+        width: min(230px, 72%);
+        margin: 0 auto 32px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(30px, 8vw, 44px);
+        line-height: 1;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .intro {
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      input {
+        width: 100%;
+        min-height: 58px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        outline: none;
+        color: var(--black);
+        background: var(--white);
+        font: inherit;
+        font-size: 16px;
+      }
+
+      input:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(50, 146, 183, 0.24);
+      }
+
+      button {
+        min-height: 58px;
+        border: 0;
+        border-radius: 14px;
+        color: var(--white);
+        background: var(--blue);
+        font: inherit;
+        font-size: 17px;
+        font-weight: 800;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+
+      button:hover:not(:disabled) {
+        background: var(--blue-dark);
+      }
+
+      button:active:not(:disabled) {
+        transform: scale(0.98);
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.64;
+      }
+
+      .status {
+        min-height: 42px;
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .status.success {
+        color: var(--success);
+      }
+
+      .status.error {
+        color: var(--error);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <img class="logo" src="../assets/logo-clipper-white.png" alt="CLIPPER">
+      <h1>Redirección</h1>
+      <p class="intro">Pegá la nueva URL de destino y aceptá para publicarla.</p>
+
+      <form id="redirectForm" novalidate>
+        <label for="destination">URL de destino</label>
+        <input
+          id="destination"
+          name="destination"
+          type="url"
+          inputmode="url"
+          autocomplete="url"
+          placeholder="https://ejemplo.com"
+          required
+          autofocus
+        >
+        <button id="submitButton" type="submit">Aceptar</button>
+        <p class="status" id="statusMessage" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <script>
+      const form = document.getElementById("redirectForm");
+      const input = document.getElementById("destination");
+      const submitButton = document.getElementById("submitButton");
+      const statusMessage = document.getElementById("statusMessage");
+
+      function showStatus(message, type = "") {
+        statusMessage.textContent = message;
+        statusMessage.className = `status ${type}`.trim();
+      }
+
+      function normalizeUrl(value) {
+        const trimmedValue = value.trim();
+        const normalizedValue = /^https?:\/\//i.test(trimmedValue)
+          ? trimmedValue
+          : `https://${trimmedValue}`;
+        const destination = new URL(normalizedValue);
+
+        if (!["http:", "https:"].includes(destination.protocol) || !destination.hostname) {
+          throw new Error("Invalid URL");
+        }
+
+        return destination.href;
+      }
+
+      async function loadCurrentUrl() {
+        try {
+          const response = await fetch("/api/redirect", { cache: "no-store" });
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "No se pudo cargar el destino actual.");
+          }
+
+          input.value = data.url;
+        } catch (error) {
+          showStatus(error.message, "error");
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        showStatus("");
+
+        let destination;
+
+        try {
+          destination = normalizeUrl(input.value);
+        } catch {
+          showStatus("Ingresá una URL válida, por ejemplo: https://ejemplo.com", "error");
+          input.focus();
+          return;
+        }
+
+        input.value = destination;
+        submitButton.disabled = true;
+        submitButton.textContent = "Publicando…";
+        showStatus("Guardando y publicando el nuevo destino…");
+
+        try {
+          const response = await fetch("/api/redirect", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Redirect-Admin": "clipper-local"
+            },
+            body: JSON.stringify({ url: destination })
+          });
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "No se pudo publicar el cambio.");
+          }
+
+          showStatus(data.message, "success");
+        } catch (error) {
+          showStatus(error.message, "error");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Aceptar";
+        }
+      });
+
+      loadCurrentUrl();
+    </script>
+  </body>
+</html>

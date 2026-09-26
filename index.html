@@ -4,16 +4,89 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <meta http-equiv="refresh" content="0; url=https://linktr.ee/clipper.jta?utm_source=qr_code">
+    <meta name="theme-color" content="#080808">
     <title>Redirigiendo a CLIPPER</title>
-    <script>
-      window.location.replace("https://linktr.ee/clipper.jta?utm_source=qr_code");
-    </script>
+
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #ffffff;
+        background: #080808;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+      }
+
+      main {
+        max-width: 440px;
+      }
+
+      img {
+        width: min(230px, 72vw);
+        margin-bottom: 22px;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.5;
+      }
+
+      a {
+        color: #6fc8e7;
+      }
+    </style>
   </head>
+
   <body>
-    <p>
-      Redirigiendo a
-      <a href="https://linktr.ee/clipper.jta?utm_source=qr_code">CLIPPER</a>…
-    </p>
+    <main>
+      <img src="./assets/logo-clipper-white.png" alt="CLIPPER">
+      <p id="message">Redirigiendo…</p>
+      <p><a id="fallbackLink" href="https://linktr.ee/clipper.jta?utm_source=qr_code">Continuar manualmente</a></p>
+    </main>
+
+    <script>
+      const defaultUrl = "https://linktr.ee/clipper.jta?utm_source=qr_code";
+      const fallbackLink = document.getElementById("fallbackLink");
+      const message = document.getElementById("message");
+
+      function isSafeUrl(value) {
+        try {
+          const url = new URL(value);
+          return ["http:", "https:"].includes(url.protocol);
+        } catch {
+          return false;
+        }
+      }
+
+      async function redirect() {
+        let destination = defaultUrl;
+
+        try {
+          const response = await fetch(`./redirect-config.json?v=${Date.now()}`, {
+            cache: "no-store"
+          });
+
+          if (!response.ok) {
+            throw new Error("No se pudo cargar la configuración.");
+          }
+
+          const config = await response.json();
+          if (isSafeUrl(config.url)) {
+            destination = config.url;
+          }
+        } catch {
+          message.textContent = "No se pudo cargar el destino actualizado. Continuando…";
+        }
+
+        fallbackLink.href = destination;
+        window.location.replace(destination);
+      }
+
+      redirect();
+    </script>
   </body>
 </html>
